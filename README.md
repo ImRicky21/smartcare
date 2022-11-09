@@ -6,8 +6,10 @@ Fitur :
 
 **- Membuat indikator gizi anak dan ibu hamil**
 
-**- Membuat tempat diskusi bagi sesama ibu dalam mengatasi masalah anak**
+**- Membuat tempat diskusi bagi sesama ibu dalam mengatasi masalah anak (?)**
 
 **- Membuat fitur monitoring tumbuh kembang anak**
 
-**- Membuat tempat untuk sesi konsultasi dengan para ahli**
+**- Membuat tempat untuk sesi konsultasi dengan para ahli (?)**
+
+**- Artikel Konten (?)**
