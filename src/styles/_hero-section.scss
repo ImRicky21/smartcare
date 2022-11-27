@@ -1,0 +1,15 @@
+@import 'base';
+
+.hero {
+  &-section {
+    background-image: url('../public/hero.jpg');
+    background-position: 50% 0%;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-color: $color-tertiary;
+    height: 90vh;
+
+    display: flex;
+    align-items: flex-end;
+  }
+}

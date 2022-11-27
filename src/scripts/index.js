@@ -7,7 +7,7 @@ import * as bootstrap from 'bootstrap';
 // import { BrowserRouter } from 'react-router-dom';
 
 const root = createRoot(document.getElementById('root'));
-root.render(
-  // eslint-disable-next-line react/jsx-filename-extension
-  <App />,
-);
+// root.render(
+//   // eslint-disable-next-line react/jsx-filename-extension
+//   <App />,
+// );
