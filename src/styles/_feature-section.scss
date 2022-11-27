@@ -1,0 +1,21 @@
+.feature {
+  &-content {
+    padding: 2rem;
+
+    .feature-card {
+      width: 100%;
+
+      &__image {
+        width: 300px;
+        height: 300px;
+      }
+
+      &__heading {
+        font-size: 1.5rem;
+        text-align: center;
+        overflow-y: hidden;
+      }
+
+    }
+  }
+}

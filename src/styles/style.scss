@@ -2,6 +2,7 @@
 @import "navbar";
 @import "hero-section";
 @import "base";
+@import 'feature-section';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 $font: 'Poppins',
 sans-serif;
@@ -13,4 +14,11 @@ sans-serif;
   font-size: 16px;
   color: $color-neutral-dark;
   font-family: $font;
+  overflow-x: hidden;
+}
+
+ul {
+  li {
+    list-style: none;
+  }
 }
