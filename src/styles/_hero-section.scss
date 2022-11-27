@@ -8,8 +8,27 @@
     background-repeat: no-repeat;
     background-color: $color-tertiary;
     height: 90vh;
-
     display: flex;
-    align-items: flex-end;
+    align-items: end;
+
+
+    @media screen and (min-width: 648px) {
+      & {
+        background-position: 0 50%;
+        align-items: center;
+        justify-content: end;
+        padding: 0 4rem;
+
+        .hero-content {
+          width: 50vw;
+          display: flex;
+          align-items: center;
+
+          .btn {
+            min-width: 300px;
+          }
+        }
+      }
+    }
   }
 }
