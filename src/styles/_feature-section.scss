@@ -1,0 +1,28 @@
+.feature {
+  &-content {
+    padding: 2rem;
+    display: grid;
+    grid-template-rows: repeat(4, 1fr);
+
+    @media screen and (min-width: 868px) {
+      padding: 2rem 4rem;
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+    }
+
+    .feature-card {
+      width: 100%;
+
+      &__image {
+        width: 300px;
+        height: 300px;
+      }
+
+      &__heading {
+        font-size: 1.5rem;
+        text-align: center;
+        overflow-y: hidden;
+      }
+    }
+  }
+}

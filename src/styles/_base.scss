@@ -1,0 +1,77 @@
+$color-primary: #3e6d9c;
+$color-primary-light: #b8e8fc;
+$color-primary-dark: #001253;
+
+$color-secondary: #fd841f;
+$color-secondary-light: #FFD384;
+$color-secondary-dark: #e14d2a;
+
+$color-tertiary: #C8FFD4;
+$color-tertiary-light: #F4FEF6;
+$color-tertiary-dark: #7FA487;
+
+$color-neutral-dark: #1e1e1e;
+$color-neutral-light: #ffffff;
+
+.bg-primary {
+  background-color: $color-primary;
+}
+
+
+.text-dark {
+  color: $color-neutral-dark;
+}
+
+.text-light {
+  color: $color-neutral-light;
+}
+
+.text-primary {
+  color: $color-primary;
+}
+
+.text-primary-dark {
+  color: $color-primary-dark;
+}
+
+.text-secondary {
+  color: $color-secondary;
+}
+
+.text-tertiary {
+  color: $color-tertiary;
+}
+
+.bg-light {
+  color: $color-neutral-light;
+}
+
+.btn {
+  border-radius: 1rem;
+  margin: .5rem 0;
+  padding: .5rem .5rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.btn-primary {
+  background-color: $color-secondary;
+  color: $color-neutral-light;
+  box-shadow: inset 0 -6px 0 0 $color-secondary-dark;
+  border: none;
+
+  &:hover {
+    background-color: $color-secondary-light;
+  }
+}
+
+.btn-secondary {
+  background-color: $color-primary;
+  color: $color-neutral-light;
+  box-shadow: inset 0 -6px 0 0 $color-primary-dark;
+  border: none;
+
+  &:hover {
+    background-color: $color-primary-light;
+  }
+}

@@ -1,0 +1,43 @@
+@import 'base';
+
+.hero {
+  &-section {
+    background-image: url('../public/hero/star-pattern.jpg');
+    background-size: 200px 200px;
+    background-repeat: repeat;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
+    .hero-image {
+      height: 40vh;
+    }
+
+    @media screen and (min-width: 648px) {
+      & {
+        align-items: center;
+        justify-content: space-around;
+        flex-direction: row;
+
+        .hero-image {
+          height: 40vh;
+        }
+
+        .hero-content {
+          width: 35vw;
+        }
+      }
+    }
+
+    @media screen and (min-width: 868px) {
+      & {
+
+        .hero-image {
+          height: 70vh;
+        }
+
+      }
+    }
+  }
+}
