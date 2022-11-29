@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 export default function HeroSection() {
   return (
@@ -12,8 +13,12 @@ export default function HeroSection() {
           elit.
           Repudiandae, autem.
         </h1>
-        <button type="button" className="btn btn-primary">ayo mulai</button>
-        <button type="button" className="btn btn-secondary">sudah punya akun?</button>
+        <button type="button" id="button-sign-in" className="btn btn-primary">
+          <Link to="/sign-up">
+            ayo mulai
+          </Link>
+        </button>
+        <button type="button" id="button-sign-up" className="btn btn-secondary">sudah punya akun?</button>
       </div>
     </section>
   );
