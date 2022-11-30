@@ -18,7 +18,11 @@ export default function HeroSection() {
             ayo mulai
           </Link>
         </button>
-        <button type="button" id="button-sign-up" className="btn btn-secondary">sudah punya akun?</button>
+        <button type="button" id="button-sign-up" className="btn btn-secondary">
+          <Link to="/sign-in">
+            sudah punya akun?
+          </Link>
+        </button>
       </div>
     </section>
   );

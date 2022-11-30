@@ -4,6 +4,7 @@
 @import 'base';
 @import 'footer';
 @import 'feature-section';
+@import 'authentication-form';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 $font: 'Poppins',
 sans-serif;
@@ -16,6 +17,10 @@ sans-serif;
   color: $color-neutral-dark;
   font-family: $font;
   overflow-x: hidden;
+}
+
+main {
+  min-height: 100vh;
 }
 
 ul {

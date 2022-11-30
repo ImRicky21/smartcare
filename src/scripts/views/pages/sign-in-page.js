@@ -1,32 +1,16 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-filename-extension */
-// import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { register } from '../../data/network-data';
+import PropTypes from 'prop-types';
 
-export default function SignUpPage() {
-  const navigate = useNavigate();
+function SignInPage({ SignInHandler }) {
   const [inputEmail, setInputEmail] = useState('');
   const [inputPassword, setInputPassword] = useState('');
 
-  const signUpWithFirebaseHandler = async (event) => {
-    event.preventDefault();
-    const data = {
-      email: inputEmail,
-      password: inputPassword,
-    };
-    const response = await register(data);
-    if (response.error) {
-      alert('error');
-    }
-    alert('succes');
-    navigate('/sign-in');
-  };
-
   return (
     <form className="form-authentication">
-      <h1 className="form-heading py-1">Sign Up</h1>
+      <h1 className="form-heading py-1">Sign In</h1>
       <div className="form-floating mb-3">
         <input
           type="email"
@@ -55,14 +39,20 @@ export default function SignUpPage() {
       </div>
       <button
         type="submit"
-        className="btn btn-primary btn-fluid"
-        onClick={signUpWithFirebaseHandler}
+        className="btn btn-secondary btn-fluid"
+        onClick={(event) => SignInHandler(event, inputEmail, inputPassword)}
       >
-        Buat Akun
+        Masukkan Akun
       </button>
-      <Link to="/sign-in">
-        Sudah memiliki akun?
+      <Link to="/sign-up">
+        Belum memiliki akun?
       </Link>
     </form>
   );
 }
+
+SignInPage.propTypes = {
+  SignInHandler: PropTypes.func.isRequired,
+};
+
+export default SignInPage;
