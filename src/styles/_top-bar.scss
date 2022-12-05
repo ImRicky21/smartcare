@@ -1,0 +1,43 @@
+@import 'base';
+
+.top-bar {
+  width: 100vw;
+  padding: 1rem 1rem;
+  display: grid;
+  grid-template-columns: 5fr 1fr;
+  align-items: center;
+  column-gap: 1rem;
+  background: $color-main-bg;
+
+
+  &__family-name {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: $color-primary;
+    border-radius: 15px;
+    font-size: 2rem;
+    height: 52px;
+
+    * {
+      color: $color-neutral-light;
+      font-size: 1.5rem;
+    }
+
+    *:first-child {
+      font-weight: bold;
+      margin-right: .5rem;
+    }
+  }
+
+  &__button-sign-out {
+    svg {
+      width: 2rem;
+      height: 2rem;
+
+      path {
+        color: $color-neutral-light;
+      }
+    }
+  }
+}

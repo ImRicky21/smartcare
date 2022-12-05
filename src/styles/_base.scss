@@ -11,10 +11,12 @@ $color-tertiary-light: #F4FEF6;
 $color-tertiary-dark: #7FA487;
 
 $color-neutral-dark: #1e1e1e;
+$color-neutral-gray: #797979;
 $color-neutral-light: #ffffff;
+$color-main-bg: #E4FFEA;
 
 .bg-primary {
-  background-color: $color-primary;
+  background-color: $color-primary !important;
 }
 
 
@@ -32,6 +34,10 @@ $color-neutral-light: #ffffff;
 
 .text-primary-dark {
   color: $color-primary-dark;
+}
+
+.text-primary-light {
+  color: $color-primary-light;
 }
 
 .text-secondary {

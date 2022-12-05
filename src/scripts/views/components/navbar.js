@@ -2,7 +2,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
 
-export default function NavBar() {
+function NavBar() {
   return (
     <nav className="navbar navbar-expand-sm bg-primary">
       <div className="container-fluid d-flex justify-content-between">
@@ -39,3 +39,5 @@ export default function NavBar() {
     </nav>
   );
 }
+
+export default NavBar;
