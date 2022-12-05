@@ -8,12 +8,13 @@ import path from '../utils/path';
 import Footer from './components/footer';
 import NavBar from './components/navbar';
 import TopBar from './components/top-bar';
+import ArticlesPage from './pages/articles-page';
+import DevelopMentPage from './pages/development-page';
 import GrowthPage from './pages/growth-page';
 import LandingPage from './pages/landing-page';
 import SignInPage from './pages/sign-in-page';
 import SignUpPage from './pages/sign-up-page';
-
-const { root, signUp, signIn } = path;
+import VaccinesPage from './pages/vaccines-page';
 
 export default function App() {
   const [authedUser, setAuthedUser] = useState('');
@@ -78,6 +79,15 @@ export default function App() {
     navigate('/sign-in');
   };
 
+  const {
+    root,
+    signUp,
+    signIn,
+    depelopment,
+    articles,
+    vaccines,
+  } = path;
+
   return (
     <>
       {authedUser
@@ -85,7 +95,12 @@ export default function App() {
           <>
             <TopBar username={authedUser.username} signOutHandler={signOutHandler} />
             <main>
-              <GrowthPage />
+              <Routes>
+                <Route path={root} element={<GrowthPage />} />
+                <Route path={depelopment} element={<DevelopMentPage />} />
+                <Route path={articles} element={<ArticlesPage />} />
+                <Route path={vaccines} element={<VaccinesPage />} />
+              </Routes>
             </main>
           </>
         ) : (
