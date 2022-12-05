@@ -1,38 +1,36 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/jsx-filename-extension */
-// import { createUserWithEmailAndPassword } from 'firebase/auth';
 import React, { useState } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
-import { register } from '../../data/network-data';
+import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-export default function SignUpPage() {
-  const navigate = useNavigate();
+function SignUpPage({ SignUpHandler }) {
+  const [inputUsername, setInputUsername] = useState('');
   const [inputEmail, setInputEmail] = useState('');
   const [inputPassword, setInputPassword] = useState('');
-
-  const signUpWithFirebaseHandler = async (event) => {
-    event.preventDefault();
-    const data = {
-      email: inputEmail,
-      password: inputPassword,
-    };
-    const response = await register(data);
-    if (response.error) {
-      alert('error');
-    }
-    alert('succes');
-    navigate('/sign-in');
-  };
 
   return (
     <form className="form-authentication">
       <h1 className="form-heading py-1">Sign Up</h1>
       <div className="form-floating mb-3">
         <input
+          type="text"
+          className="form-control"
+          id="input-username-sign-up"
+          placeholder="username"
+          value={inputUsername}
+          onChange={(event) => {
+            setInputUsername(event.target.value);
+          }}
+        />
+        <label htmlFor="floatingInput">Username</label>
+      </div>
+      <div className="form-floating mb-3">
+        <input
           type="email"
           className="form-control"
           id="input-email-sign-up"
-          placeholder="name@example.com"
+          placeholder="email"
           value={inputEmail}
           onChange={(event) => {
             setInputEmail(event.target.value);
@@ -56,7 +54,14 @@ export default function SignUpPage() {
       <button
         type="submit"
         className="btn btn-primary btn-fluid"
-        onClick={signUpWithFirebaseHandler}
+        onClick={(event) => {
+          SignUpHandler({
+            event,
+            username: inputUsername,
+            email: inputEmail,
+            password: inputPassword,
+          });
+        }}
       >
         Buat Akun
       </button>
@@ -66,3 +71,9 @@ export default function SignUpPage() {
     </form>
   );
 }
+
+SignUpPage.propTypes = {
+  SignUpHandler: PropTypes.func.isRequired,
+};
+
+export default SignUpPage;

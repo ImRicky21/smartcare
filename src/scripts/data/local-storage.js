@@ -11,7 +11,7 @@ const dbPromise = openDB(DATABASE_NAME, DATABASE_VERSION, {
   },
 });
 
-const AuthenticationIdb = {
+const LocalStorage = {
   async putAccount(account) {
     if (!account.hasOwnProperty('key')) {
       return;
@@ -28,4 +28,4 @@ const AuthenticationIdb = {
   },
 };
 
-export default AuthenticationIdb;
+export default LocalStorage;

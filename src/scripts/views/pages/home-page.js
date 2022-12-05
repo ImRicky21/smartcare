@@ -2,18 +2,18 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-function HomePage({ email }) {
+function HomePage({ username }) {
   return (
     <h1>
       Hello
       {' '}
-      {email}
+      {username}
     </h1>
   );
 }
 
 HomePage.propTypes = {
-  email: PropTypes.string.isRequired,
+  username: PropTypes.string.isRequired,
 };
 
 export default HomePage;

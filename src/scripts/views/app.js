@@ -1,12 +1,14 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable react/jsx-filename-extension */
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
-import AuthenticationIdb from '../data/local-storage';
-import { login } from '../data/network-data';
+import LocalStorage from '../data/local-storage';
+import { login, register } from '../data/network-data';
 import path from '../utils/path';
 import Footer from './components/footer';
 import NavBar from './components/navbar';
-import HomePage from './pages/home-page';
+import TopBar from './components/top-bar';
+import GrowthPage from './pages/growth-page';
 import LandingPage from './pages/landing-page';
 import SignInPage from './pages/sign-in-page';
 import SignUpPage from './pages/sign-up-page';
@@ -19,59 +21,86 @@ export default function App() {
 
   useEffect(() => {
     async function getAuthedUser() {
-      const user = await AuthenticationIdb.getAccount('get-account');
+      const user = await LocalStorage.getAccount('get-account');
       setAuthedUser(user);
     }
     getAuthedUser();
   }, []);
 
   const signOutHandler = async () => {
-    await AuthenticationIdb.deleteAccount('get-account');
+    await LocalStorage.deleteAccount('get-account');
     setAuthedUser('');
     navigate('/');
   };
 
-  const signInHandler = async (event, email, password) => {
+  const signInHandler = async ({
+    event, email, password,
+  }) => {
     event.preventDefault();
     const data = {
       email,
       password,
     };
     const response = await login(data);
+    console.log(response);
     if (response.error) {
       alert('error');
+      return;
     }
     const account = {
       key: 'get-account',
       ...response.data,
     };
-    await AuthenticationIdb.putAccount(account);
+    console.log(account);
+    await LocalStorage.putAccount(account);
     alert('succes');
-    setAuthedUser(account.email);
+    setAuthedUser(account);
     navigate('/');
+  };
+
+  const signUpHandler = async ({
+    event, username, email, password,
+  }) => {
+    event.preventDefault();
+    const data = {
+      username,
+      email,
+      password,
+    };
+    const response = await register(data);
+    if (response.error) {
+      console.log(response);
+      alert('error');
+      return;
+    }
+    console.log(response);
+    alert('succes');
+    navigate('/sign-in');
   };
 
   return (
     <>
-      <main>
-        {authedUser
-          ? (
-            <>
-              <NavBar SignOutButton SignOutHandler={signOutHandler} />
-              <HomePage email={authedUser.email} />
-            </>
-          ) : (
-            <>
-              <NavBar SignOutButton={false} SignOutHandler={signOutHandler} />
+      {authedUser
+        ? (
+          <>
+            <TopBar username={authedUser.username} signOutHandler={signOutHandler} />
+            <main>
+              <GrowthPage />
+            </main>
+          </>
+        ) : (
+          <>
+            <NavBar />
+            <main>
               <Routes>
                 <Route path={root} element={<LandingPage />} />
-                <Route path={signUp} element={<SignUpPage />} />
+                <Route path={signUp} element={<SignUpPage SignUpHandler={signUpHandler} />} />
                 <Route path={signIn} element={<SignInPage SignInHandler={signInHandler} />} />
               </Routes>
-            </>
-          )}
-      </main>
-      <Footer />
+            </main>
+            <Footer />
+          </>
+        )}
     </>
   );
 }

@@ -40,7 +40,11 @@ function SignInPage({ SignInHandler }) {
       <button
         type="submit"
         className="btn btn-secondary btn-fluid"
-        onClick={(event) => SignInHandler(event, inputEmail, inputPassword)}
+        onClick={(event) => SignInHandler({
+          event,
+          email: inputEmail,
+          password: inputPassword,
+        })}
       >
         Masukkan Akun
       </button>

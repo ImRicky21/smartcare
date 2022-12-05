@@ -11,13 +11,13 @@ async function login({ email, password }) {
   return response.json();
 }
 
-async function register({ email, password }) {
+async function register({ username, email, password }) {
   const response = await fetch(`${API_ENDPOINT.signUp}`, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify({ username, email, password }),
   });
 
   return response.json();

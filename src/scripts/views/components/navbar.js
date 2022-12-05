@@ -1,9 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import PropTypes from 'prop-types';
 
-function NavBar({ SignOutButton, SignOutHandler }) {
+function NavBar() {
   return (
     <nav className="navbar navbar-expand-sm bg-primary">
       <div className="container-fluid d-flex justify-content-between">
@@ -34,24 +33,11 @@ function NavBar({ SignOutButton, SignOutHandler }) {
             <li className="nav-item text-center mx-2">
               <a className="nav-link text-light" href="#feature-section">Fitur</a>
             </li>
-            {SignOutButton
-              ? (
-                <li className="nav-item text-center mx-2">
-                  <button onClick={SignOutHandler} type="button" className="btn btn-primary">Keluar</button>
-                </li>
-              ) : (
-                ''
-              )}
           </ul>
         </div>
       </div>
     </nav>
   );
 }
-
-NavBar.propTypes = {
-  SignOutButton: PropTypes.bool.isRequired,
-  SignOutHandler: PropTypes.func.isRequired,
-};
 
 export default NavBar;
