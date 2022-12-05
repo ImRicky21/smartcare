@@ -23,7 +23,21 @@ async function register({ username, email, password }) {
   return response.json();
 }
 
+async function getUserData(id) {
+  const response = await fetch(`${API_ENDPOINT.user}${id}`);
+  const responseJson = await response.json();
+  return responseJson;
+}
+
+async function getChildData(id) {
+  const response = await fetch(`${API_ENDPOINT.child}${id}`);
+  const responseJson = await response.json();
+  return responseJson;
+}
+
 export {
   register,
   login,
+  getUserData,
+  getChildData,
 };

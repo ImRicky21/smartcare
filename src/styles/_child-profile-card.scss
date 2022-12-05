@@ -1,0 +1,47 @@
+@import 'base';
+
+.child-profile-card {
+  &__tag {
+    color: $color-primary-dark;
+    display: flex;
+    flex-direction: row;
+
+    * {
+      color: $color-primary;
+    }
+
+    &__icon {
+      width: 5rem;
+      height: 5rem;
+      margin-right: 1rem;
+    }
+
+    &__detail {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      .child-name {
+        font-size: 1.5rem;
+        font-weight: bold;
+        margin: 0;
+      }
+    }
+  }
+
+  &__stats {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+
+    * {
+      font-weight: bold;
+      padding: 4px 10px;
+      border-radius: 15px;
+      background-color: $color-neutral-gray;
+      color: $color-neutral-light;
+      font-size: .8rem;
+    }
+  }
+}

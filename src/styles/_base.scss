@@ -10,6 +10,10 @@ $color-tertiary: #C8FFD4;
 $color-tertiary-light: #F4FEF6;
 $color-tertiary-dark: #7FA487;
 
+$color-highlight-yellow: #fd841f;
+$color-highlight-green: #1ffd78;
+$color-highlight-red: #ED4245;
+
 $color-neutral-dark: #1e1e1e;
 $color-neutral-gray: #797979;
 $color-neutral-light: #ffffff;
@@ -23,6 +27,8 @@ $color-main-bg: #E4FFEA;
   background-color: $color-primary-light;
   border-radius: 15px;
   border: none;
+  margin: 10px 0;
+  padding: 1rem .5rem;
 }
 
 .text-dark {
@@ -73,6 +79,20 @@ $color-main-bg: #E4FFEA;
 
   &:hover {
     background-color: $color-secondary-light;
+  }
+}
+
+.highlight {
+  &-yellow {
+    background-color: $color-highlight-yellow;
+  }
+
+  &-red {
+    background-color: $color-highlight-red;
+  }
+
+  &-green {
+    background-color: $color-highlight-green;
   }
 }
 

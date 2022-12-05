@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import LocalStorage from '../data/local-storage';
-import { login, register } from '../data/network-data';
+import { getUserData, login, register } from '../data/network-data';
 import path from '../utils/path';
 import Footer from './components/footer';
 import NavBar from './components/navbar';
@@ -18,13 +18,21 @@ import VaccinesPage from './pages/vaccines-page';
 
 export default function App() {
   const [authedUser, setAuthedUser] = useState('');
+  const [childs, setChilds] = useState(['']);
   const navigate = useNavigate();
 
   useEffect(() => {
     async function getAuthedUser() {
       const user = await LocalStorage.getAccount('get-account');
-      setAuthedUser(user);
+      if (user) {
+        const response = await getUserData(user.id);
+        if (!response.error) {
+          setChilds(response.data.childs);
+        }
+        setAuthedUser(user);
+      }
     }
+
     getAuthedUser();
   }, []);
 
@@ -96,7 +104,14 @@ export default function App() {
             <TopBar username={authedUser.username} signOutHandler={signOutHandler} />
             <main>
               <Routes>
-                <Route path={root} element={<GrowthPage userData={authedUser} />} />
+                <Route
+                  path={root}
+                  element={(
+                    <GrowthPage
+                      childs={childs}
+                    />
+                  )}
+                />
                 <Route path={depelopment} element={<DevelopMentPage />} />
                 <Route path={articles} element={<ArticlesPage />} />
                 <Route path={vaccines} element={<VaccinesPage />} />
