@@ -96,7 +96,7 @@ export default function App() {
             <TopBar username={authedUser.username} signOutHandler={signOutHandler} />
             <main>
               <Routes>
-                <Route path={root} element={<GrowthPage />} />
+                <Route path={root} element={<GrowthPage userData={authedUser} />} />
                 <Route path={depelopment} element={<DevelopMentPage />} />
                 <Route path={articles} element={<ArticlesPage />} />
                 <Route path={vaccines} element={<VaccinesPage />} />

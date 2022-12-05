@@ -3,6 +3,7 @@
 @import 'hero-section';
 @import 'base';
 @import 'footer';
+@import 'growth-page';
 @import 'app-bar';
 @import 'top-bar';
 @import 'feature-section';
@@ -24,6 +25,10 @@ sans-serif;
 main {
   background: $color-main-bg;
   min-height: 90vh;
+}
+
+.main-content {
+  padding: 0 1rem;
 }
 
 ul {

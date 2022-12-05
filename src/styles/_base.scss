@@ -19,6 +19,11 @@ $color-main-bg: #E4FFEA;
   background-color: $color-primary !important;
 }
 
+.card {
+  background-color: $color-primary-light;
+  border-radius: 15px;
+  border: none;
+}
 
 .text-dark {
   color: $color-neutral-dark;
