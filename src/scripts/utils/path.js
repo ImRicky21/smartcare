@@ -5,6 +5,7 @@ const path = {
   depelopment: '/development',
   articles: '/articles',
   vaccines: '/vaccines',
+  addChild: '/child/add',
 };
 
 export default path;

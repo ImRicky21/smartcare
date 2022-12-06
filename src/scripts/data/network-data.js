@@ -35,9 +35,24 @@ async function getChildData(id) {
   return responseJson;
 }
 
+async function setChildData({ id, data }) {
+  console.log(id);
+  console.log(data);
+  const response = await fetch(`${API_ENDPOINT.addChild}${id}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ ...data }),
+  });
+
+  return response.json();
+}
+
 export {
   register,
   login,
   getUserData,
   getChildData,
+  setChildData,
 };

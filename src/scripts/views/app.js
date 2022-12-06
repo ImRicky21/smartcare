@@ -2,12 +2,19 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
+import moment from 'moment';
 import LocalStorage from '../data/local-storage';
-import { getUserData, login, register } from '../data/network-data';
+import {
+  getUserData,
+  login,
+  register,
+  setChildData,
+} from '../data/network-data';
 import path from '../utils/path';
 import Footer from './components/footer';
 import NavBar from './components/navbar';
 import TopBar from './components/top-bar';
+import AddChildPage from './pages/add-child-page';
 import ArticlesPage from './pages/articles-page';
 import DevelopMentPage from './pages/development-page';
 import GrowthPage from './pages/growth-page';
@@ -87,6 +94,56 @@ export default function App() {
     navigate('/sign-in');
   };
 
+  const addChildHandler = async ({
+    event,
+    name,
+    gender,
+    birthDate,
+    weight,
+    height,
+    headlength,
+  }) => {
+    event.preventDefault();
+    const age = moment().diff(moment(birthDate, 'YYYY-MM-DD'), 'month');
+    const data = {
+      age: age === 0 ? 1 : age,
+      name,
+      gender,
+      birthDate,
+      weight,
+      height,
+      headlength,
+    };
+    if (name === '') {
+      alert('nama kosong');
+      return;
+    }
+    if (height <= 1) {
+      alert('input tinggi badan salah');
+      return;
+    }
+    if (weight <= 1) {
+      alert('input berat badan salah');
+      return;
+    }
+    if (headlength <= 1) {
+      alert('input lingkar kepala badan salah');
+      return;
+    }
+    alert('succes');
+
+    const response = await setChildData({ id: authedUser.id, data });
+
+    if (response.error) {
+      alert(`error: ${response.message}`);
+      return;
+    }
+
+    alert('succes');
+    setChilds([response.data.childs, ...childs]);
+    navigate('/');
+  };
+
   const {
     root,
     signUp,
@@ -94,6 +151,7 @@ export default function App() {
     depelopment,
     articles,
     vaccines,
+    addChild,
   } = path;
 
   return (
@@ -115,6 +173,10 @@ export default function App() {
                 <Route path={depelopment} element={<DevelopMentPage />} />
                 <Route path={articles} element={<ArticlesPage />} />
                 <Route path={vaccines} element={<VaccinesPage />} />
+                <Route
+                  path={addChild}
+                  element={<AddChildPage AddChildHandler={addChildHandler} />}
+                />
               </Routes>
             </main>
           </>

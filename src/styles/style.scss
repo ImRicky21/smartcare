@@ -2,9 +2,11 @@
 @import 'navbar';
 @import 'child-profile-card';
 @import 'hero-section';
+@import 'add-child-page';
 @import 'base';
 @import 'footer';
 @import 'growth-page';
+@import 'back-button';
 @import 'app-bar';
 @import 'top-bar';
 @import 'feature-section';
@@ -30,12 +32,17 @@ main {
 
 .main-content {
   padding: 0 1rem;
+  margin-bottom: 15vh;
 }
 
 ul {
   li {
     list-style: none;
   }
+}
+
+input {
+  all: unset;
 }
 
 a,
