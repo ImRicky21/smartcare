@@ -7,7 +7,7 @@ import { FaPlusCircle, FaExclamationCircle } from 'react-icons/fa';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import AppBar from '../components/app-bar';
-import ChildProfileCard from './child-profile-card';
+import ChildProfileCard from '../components/child-profile-card';
 
 function GrowthPage({ childs }) {
   const navigates = useNavigate();
