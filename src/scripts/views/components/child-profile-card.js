@@ -39,7 +39,7 @@ function ChildProfileCard({ id }) {
   };
 
   function onClickCardHandler() {
-    navigates(`/growth/child/${id}`);
+    navigates(`/child/growth/${id}`);
   }
 
   useEffect(() => {

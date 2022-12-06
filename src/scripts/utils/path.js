@@ -6,6 +6,7 @@ const path = {
   articles: '/articles',
   vaccines: '/vaccines',
   addChild: '/child/add',
+  detailChild: '/child/growth/:id',
 };
 
 export default path;

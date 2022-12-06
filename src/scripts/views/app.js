@@ -22,6 +22,7 @@ import LandingPage from './pages/landing-page';
 import SignInPage from './pages/sign-in-page';
 import SignUpPage from './pages/sign-up-page';
 import VaccinesPage from './pages/vaccines-page';
+import DetailChildPage from './pages/detail-child.page';
 
 export default function App() {
   const [authedUser, setAuthedUser] = useState('');
@@ -152,6 +153,7 @@ export default function App() {
     articles,
     vaccines,
     addChild,
+    detailChild,
   } = path;
 
   return (
@@ -173,6 +175,10 @@ export default function App() {
                 <Route path={depelopment} element={<DevelopMentPage />} />
                 <Route path={articles} element={<ArticlesPage />} />
                 <Route path={vaccines} element={<VaccinesPage />} />
+                <Route
+                  path={detailChild}
+                  element={<DetailChildPage />}
+                />
                 <Route
                   path={addChild}
                   element={<AddChildPage AddChildHandler={addChildHandler} />}
