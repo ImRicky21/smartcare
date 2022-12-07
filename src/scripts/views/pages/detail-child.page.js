@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useEffect, useState } from 'react';
 import { FaArrowCircleUp } from 'react-icons/fa';
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { getChildData, getGrowthFeedback } from '../../data/network-data';
 import { headlengthPerAgeColorStats, heightPerAgeColorStats, weightPerAgeColorStats } from '../../utils/highlight-status';
 import AppBar from '../components/app-bar';
@@ -74,17 +74,25 @@ function DetailChildPage() {
 
   useEffect(() => {
     async function fecthGrowthFeedback() {
+      const { data } = await getGrowthFeedback({
+        measurement: navStatus,
+        status: status[navStatus],
+      });
+      setFeedback(data);
+    }
+
+    fecthGrowthFeedback();
+  }, [navStatus]);
+
+  useEffect(() => {
+    async function changeStats() {
       if (weightPerAge && heightPerAge && headlengthPerAge) {
         setStatus({
           weight: weightPerAge,
           height: heightPerAge,
           headlength: headlengthPerAge,
         });
-        const { data } = await getGrowthFeedback({
-          measurement: navStatus,
-          status: status[navStatus],
-        });
-        setFeedback(data);
+
         setColorStats({
           height: heightPerAgeColorStats[heightPerAge],
           weight: weightPerAgeColorStats[weightPerAge],
@@ -93,17 +101,19 @@ function DetailChildPage() {
       }
     }
 
-    fecthGrowthFeedback();
-  }, [weightPerAge, heightPerAge, headlengthPerAge, navStatus]);
+    changeStats();
+  }, [weightPerAge, heightPerAge, headlengthPerAge]);
 
   return (
     <>
       <div className="main-content">
         <BackButton linkTo="/" />
         <ChildProfileCard id={id} displayStatus="body-data" />
-        <div className="update-child-profile-section card">
-          <FaArrowCircleUp className="update-child-profile-section__icon" />
-          <p className="update-child-profile-section__tag">Update Profile Anak</p>
+        <div className="update-child-profile-section-wrapper card">
+          <Link className="update-child-profile-section" to={`/child/growth/update/${id}`}>
+            <FaArrowCircleUp className="update-child-profile-section__icon" />
+            <p className="update-child-profile-section__tag">Update Profile Anak</p>
+          </Link>
         </div>
         <div className="growth-nav-bar">
           <button onClick={onClickWeigthNav} type="button" className={`growth-nav-bar__weight ${weightStatus}`}>Berat Badan</button>

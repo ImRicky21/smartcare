@@ -23,6 +23,19 @@ import SignInPage from './pages/sign-in-page';
 import SignUpPage from './pages/sign-up-page';
 import VaccinesPage from './pages/vaccines-page';
 import DetailChildPage from './pages/detail-child.page';
+import UpdateChildPage from './pages/update-child-page';
+
+const {
+  root,
+  signUp,
+  signIn,
+  depelopment,
+  articles,
+  vaccines,
+  addChild,
+  detailChild,
+  updateChild,
+} = path;
 
 export default function App() {
   const [authedUser, setAuthedUser] = useState('');
@@ -151,17 +164,6 @@ export default function App() {
     navigate('/');
   };
 
-  const {
-    root,
-    signUp,
-    signIn,
-    depelopment,
-    articles,
-    vaccines,
-    addChild,
-    detailChild,
-  } = path;
-
   return (
     <>
       {authedUser
@@ -188,6 +190,10 @@ export default function App() {
                 <Route
                   path={addChild}
                   element={<AddChildPage AddChildHandler={addChildHandler} />}
+                />
+                <Route
+                  path={updateChild}
+                  element={<UpdateChildPage />}
                 />
               </Routes>
             </main>
