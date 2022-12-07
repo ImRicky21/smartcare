@@ -5,8 +5,13 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import { getChildData } from '../../data/network-data';
+import {
+  weightPerAgeColorStats,
+  heightPerAgeColorStats,
+  headlengthPerAgeColorStats,
+} from '../../utils/highlight-status';
 
-function ChildProfileCard({ id }) {
+function ChildProfileCard({ id, displayStatus }) {
   const navigates = useNavigate();
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
@@ -15,32 +20,85 @@ function ChildProfileCard({ id }) {
   const [weightPerAge, setWeightPerAge] = useState('---');
   const [heightPerAge, setHeightPerAge] = useState('---');
   const [headlengthPerAge, setHeadLengthPerAge] = useState('');
-  // const [weight, setWeight] = useState('');
-  // const [height, setHeight] = useState('');
-  // const [headlength, setHeadLength] = useState('');
-  const weightPerAgeColorStats = {
-    kurus: 'highlight-yellow',
-    gemuk: 'highlight-red',
-    normal: 'highlight-green',
-    'sangat-kurus': 'highlight-red',
-  };
-
-  const heightPerAgeColorStats = {
-    tinggi: 'highlight-yellow',
-    pendek: 'highlight-yellow',
-    normal: 'highlight-green',
-    'sangat-pendek': 'highlight-red',
-  };
-
-  const headlengthPerAgeColorStats = {
-    makrosefali: 'highlight-red',
-    mikrosefali: 'highlight-red',
-    normal: 'highlight-green',
-  };
+  const [weight, setWeight] = useState('');
+  const [height, setHeight] = useState('');
+  const [headlength, setHeadLength] = useState('');
 
   function onClickCardHandler() {
     navigates(`/child/growth/${id}`);
   }
+
+  const statusElement = {
+    'growth-status': (
+      <>
+        <div className="child-profile-card__data">
+          <div className="data-item">
+            berat:
+            {' '}
+            <b>
+              {weight}
+              kg
+            </b>
+          </div>
+          <div className="data-item">
+            tinggi:
+            {' '}
+            <b>
+              {height}
+              cm
+            </b>
+          </div>
+          <div className="data-item">
+            lingkar kepala:
+            {' '}
+            <b>
+              {headlength}
+              cm
+            </b>
+          </div>
+        </div>
+        <div className="child-profile-card__stats">
+          <div className={`child-weight-status ${weightPerAgeColorStats[weightPerAge]}`}>
+            <b>{weightPerAge}</b>
+          </div>
+          <div className={`child-height-status ${heightPerAgeColorStats[heightPerAge]}`}>
+            <b>{heightPerAge}</b>
+          </div>
+          <div className={`child-headlength-status ${headlengthPerAgeColorStats[headlengthPerAge]}`}>
+            <b>{headlengthPerAge}</b>
+          </div>
+        </div>
+      </>
+    ),
+    'body-data': (
+      <div className="child-profile-card__data">
+        <div className="data-item">
+          berat:
+          {' '}
+          <b>
+            {weight}
+            kg
+          </b>
+        </div>
+        <div className="data-item">
+          tinggi:
+          {' '}
+          <b>
+            {height}
+            cm
+          </b>
+        </div>
+        <div className="data-item">
+          lingkar kepala:
+          {' '}
+          <b>
+            {headlength}
+            cm
+          </b>
+        </div>
+      </div>
+    ),
+  };
 
   useEffect(() => {
     async function fetchChildData() {
@@ -50,6 +108,9 @@ function ChildProfileCard({ id }) {
         setName(data.name);
         setAge(data.age);
         setGender(data.gender);
+        setWeight(data.weight);
+        setHeight(data.height);
+        setHeadLength(data.headlength);
         // setDevelopment(data.healthStatus.development);
         setWeightPerAge(data.healthStatus.weightPerAge);
         setHeightPerAge(data.healthStatus.heightPerAge);
@@ -75,17 +136,14 @@ function ChildProfileCard({ id }) {
           </div>
         </div>
       </div>
-      <div className="child-profile-card__stats">
-        <div className={`child-weight-status ${weightPerAgeColorStats[weightPerAge]}`}>{`BB: ${weightPerAge}`}</div>
-        <div className={`child-height-status ${heightPerAgeColorStats[heightPerAge]}`}>{`PB: ${heightPerAge}`}</div>
-        <div className={`child-headlength-status ${headlengthPerAgeColorStats[headlengthPerAge]}`}>{`LK: ${headlengthPerAge}`}</div>
-      </div>
+      {statusElement[displayStatus]}
     </div>
   );
 }
 
 ChildProfileCard.propTypes = {
   id: PropTypes.string.isRequired,
+  displayStatus: PropTypes.string.isRequired,
 };
 
 export default ChildProfileCard;

@@ -11,6 +11,7 @@ import ChildProfileCard from '../components/child-profile-card';
 
 function GrowthPage({ childs }) {
   const navigates = useNavigate();
+  console.log(childs);
   function onClickAddChildHandler() {
     navigates('/child/add');
   }
@@ -22,7 +23,7 @@ function GrowthPage({ childs }) {
           <p className="add-child-profile-section__tag">Tambah Profile Anak</p>
         </div>
         {childs
-          ? childs.map((child) => <ChildProfileCard id={child} key={child} />)
+          ? childs.map((child) => <ChildProfileCard id={child} key={child} displayStatus="growth-status" />)
           : (
             <div className="no-childs-alert-section card">
               <FaExclamationCircle className="no-childs-alert-section__icon" />

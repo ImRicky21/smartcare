@@ -30,18 +30,30 @@
   }
 
   &__stats {
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
     align-items: center;
     justify-content: space-between;
+    gap: .5rem;
 
     * {
-      font-weight: bold;
-      padding: 4px 10px;
-      border-radius: 15px;
-      background-color: $color-neutral-gray;
       color: $color-neutral-light;
+      border-radius: 15px;
+      font-size: .6rem;
+      text-align: center;
+    }
+  }
+
+  &__data {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: center;
+    justify-content: space-evenly;
+    border-top: 1px solid $color-primary;
+
+    * {
       font-size: .8rem;
+      color: $color-primary;
     }
   }
 }

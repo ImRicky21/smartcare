@@ -75,6 +75,19 @@
       padding: .5rem 1rem;
       border-radius: 15px;
     }
+
+    &__feedback {
+      ul {
+        padding: 0 .5rem;
+
+        li {
+          padding: .5rem;
+          margin: .3rem 0;
+          border-radius: 15px;
+          background-color: $color-tertiary;
+        }
+      }
+    }
   }
 
 }

@@ -47,6 +47,7 @@ export default function App() {
   const signOutHandler = async () => {
     await LocalStorage.deleteAccount('get-account');
     setAuthedUser('');
+    setChilds('');
     navigate('/');
   };
 
@@ -70,8 +71,12 @@ export default function App() {
     };
     console.log(account);
     await LocalStorage.putAccount(account);
-    alert('succes');
+    const userData = await getUserData(account.id);
+    if (!userData.error) {
+      setChilds(userData.data.childs);
+    }
     setAuthedUser(account);
+    alert('succes');
     navigate('/');
   };
 
@@ -141,7 +146,8 @@ export default function App() {
     }
 
     alert('succes');
-    setChilds([response.data.childs, ...childs]);
+    console.log(response);
+    setChilds([response.data.id, ...childs]);
     navigate('/');
   };
 
