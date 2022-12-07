@@ -122,9 +122,12 @@ function ChildProfileCard({ id, displayStatus }) {
   }, []);
 
   return (
-    <div className="child-profile-card card" onClick={onClickCardHandler}>
+    <div
+      className={`child-profile-card card ${displayStatus}`}
+      onClick={onClickCardHandler}
+    >
       <div className="child-profile-card__tag">
-        <img alt="baby-icon" className="child-profile-card__tag__icon" src="../../../public/others/baby.png" />
+        <img alt="baby-icon" className="child-profile-card__tag__icon" src={`${process.env.PUBLIC_URL}/others/baby.png`} />
         <div className="child-profile-card__tag__detail">
           <p className="child-name">{name}</p>
           <div className="child-detail">
