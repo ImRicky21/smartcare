@@ -1,0 +1,46 @@
+@import 'base';
+
+.form-add-child {
+  display: flex;
+  margin-bottom: 10vh !important;
+
+  * {
+    color: $color-primary;
+  }
+
+  .row-form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1rem;
+  }
+
+  .form-radio {
+    display: flex;
+
+    >* {
+      margin: 0 .5rem;
+    }
+  }
+
+  .input-label {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+
+  .input-field {
+    font-size: 1rem;
+    padding: .2rem 0;
+    color: $color-neutral-gray;
+    border-bottom: 1px solid $color-neutral-gray;
+
+    &:focus {
+      color: $color-neutral-dark;
+      border-bottom: 1px solid $color-neutral-dark;
+    }
+  }
+
+  @media screen and (min-width: 500px) {
+    padding: 1rem 2rem !important;
+  }
+}

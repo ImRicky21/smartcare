@@ -1,8 +1,13 @@
 @import '~bootstrap/scss/bootstrap';
 @import 'navbar';
+@import 'child-profile-card';
 @import 'hero-section';
+@import 'add-child-page';
 @import 'base';
+@import 'detail-child-growth-page';
 @import 'footer';
+@import 'growth-page';
+@import 'back-button';
 @import 'app-bar';
 @import 'top-bar';
 @import 'feature-section';
@@ -21,15 +26,28 @@ sans-serif;
   overflow-x: hidden;
 }
 
+body {
+  background-color: $color-main-bg;
+}
+
 main {
   background: $color-main-bg;
   min-height: 90vh;
+}
+
+.main-content {
+  padding: 0 1rem;
+  margin-bottom: 15vh;
 }
 
 ul {
   li {
     list-style: none;
   }
+}
+
+input {
+  all: unset;
 }
 
 a,

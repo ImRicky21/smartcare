@@ -23,7 +23,54 @@ async function register({ username, email, password }) {
   return response.json();
 }
 
+async function getUserData(id) {
+  const response = await fetch(`${API_ENDPOINT.user}${id}`);
+  const responseJson = await response.json();
+  return responseJson;
+}
+
+async function getChildData(id) {
+  const response = await fetch(`${API_ENDPOINT.child}${id}`);
+  const responseJson = await response.json();
+  return responseJson;
+}
+
+async function getGrowthFeedback({ measurement, status }) {
+  const response = await fetch(`${API_ENDPOINT.growth}${measurement}/${status}`);
+  const responseJson = await response.json();
+  return responseJson;
+}
+
+async function setChildData({ id, data }) {
+  const response = await fetch(`${API_ENDPOINT.addChild}${id}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ ...data }),
+  });
+
+  return response.json();
+}
+
+async function putChildData({ id, data }) {
+  const response = await fetch(`${API_ENDPOINT.child}${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ ...data }),
+  });
+
+  return response.json();
+}
+
 export {
   register,
   login,
+  getUserData,
+  getChildData,
+  setChildData,
+  getGrowthFeedback,
+  putChildData,
 };
