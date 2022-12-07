@@ -26,6 +26,10 @@ sans-serif;
   overflow-x: hidden;
 }
 
+body {
+  background-color: $color-main-bg;
+}
+
 main {
   background: $color-main-bg;
   min-height: 90vh;

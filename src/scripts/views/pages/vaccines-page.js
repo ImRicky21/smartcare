@@ -5,12 +5,10 @@ import AppBar from '../components/app-bar';
 
 function VaccinesPage() {
   return (
-    <>
-      <div className="main-content">
-        <h1>Page Vaksin</h1>
-      </div>
+    <div className="main-content">
       <AppBar listActive="vaccines-page" />
-    </>
+      <h1>Page Vaksin</h1>
+    </div>
   );
 }
 

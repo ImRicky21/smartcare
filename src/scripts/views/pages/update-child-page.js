@@ -84,59 +84,57 @@ function UpdateChildPage() {
   }, []);
 
   return (
-    <>
-      <div className="main-content mb-5">
-        <BackButton linkTo={`/child/growth/${id}`} />
-        <form className="form-add-child card">
-          <div className="row-form">
-            <label className="input-label" htmlFor="input-child-name">Nama</label>
-            <input disabled value={name} className="input-field" id="input-child-name" type="text" placeholder="Nama" />
-          </div>
-          <div className="row-form">
-            <label className="input-label">Gender</label>
-            <div className="form-radio">
-              <div className="form-check">
-                <input disabled className="form-check-input" type="radio" name="flexRadioDefault" id="input-gender-male" value="laki-laki" defaultChecked={gender === 'laki-laki' ? 'true' : 'false'} />
-                <label className="form-check-label" htmlFor="input-gender-male">
-                  Laki-laki
-                </label>
-              </div>
-              <div className="form-check">
-                <input disabled required className="form-check-input" type="radio" name="flexRadioDefault" id="input-gender-female" value="perempuan" defaultChecked={gender === 'perempuan' ? 'true' : 'false'} />
-                <label className="form-check-label" htmlFor="input-gender-female">
-                  Perempuan
-                </label>
-              </div>
+    <div className="main-content mb-5">
+      <AppBar listActive="growth-page" />
+      <BackButton linkTo={`/child/growth/${id}`} />
+      <form className="form-add-child card">
+        <div className="row-form">
+          <label className="input-label" htmlFor="input-child-name">Nama</label>
+          <input disabled value={name} className="input-field" id="input-child-name" type="text" placeholder="Nama" />
+        </div>
+        <div className="row-form">
+          <label className="input-label">Gender</label>
+          <div className="form-radio">
+            <div className="form-check">
+              <input disabled className="form-check-input" type="radio" name="flexRadioDefault" id="input-gender-male" value="laki-laki" defaultChecked={gender === 'laki-laki' ? 'true' : 'false'} />
+              <label className="form-check-label" htmlFor="input-gender-male">
+                Laki-laki
+              </label>
+            </div>
+            <div className="form-check">
+              <input disabled required className="form-check-input" type="radio" name="flexRadioDefault" id="input-gender-female" value="perempuan" defaultChecked={gender === 'perempuan' ? 'true' : 'false'} />
+              <label className="form-check-label" htmlFor="input-gender-female">
+                Perempuan
+              </label>
             </div>
           </div>
-          <div className="row-form">
-            <label className="input-label" htmlFor="input-date">Tanggal lahir</label>
-            <input value={birthDate} disabled className="input-field" id="input-date" type="date" min="2002-01-01" max={moment().format('YYYY-MM-DD')} />
-          </div>
-          <div className="row-form">
-            <label className="input-label" htmlFor="input-weight">Berat Badan</label>
-            <input value={weight} onChange={(event) => onWeightChangeHandler(event.target.value)} required className="input-field" id="input-weight" type="number" min="1" placeholder="kg" />
-          </div>
-          <div className="row-form">
-            <label className="input-label" htmlFor="input-height">Tinggi Badan</label>
-            <input value={height} onChange={(event) => onHeightChangeHandler(event.target.value)} required className="input-field" id="input-height" type="number" min={1} placeholder="cm" />
-          </div>
-          <div className="row-form">
-            <label className="input-label" htmlFor="input-headlength">Lingkar Kepala</label>
-            <input value={headlength} onChange={(event) => onHeadLengthChangeHandler(event.target.value)} required className="input-field" id="input-headlength" type="number" min={1} placeholder="cm" />
-          </div>
-          <button
-            type="submit"
-            className="button-save-child btn btn-primary"
-            onClick={(event) => updateChildHandler(event)}
-          >
-            Update
-          </button>
+        </div>
+        <div className="row-form">
+          <label className="input-label" htmlFor="input-date">Tanggal lahir</label>
+          <input value={birthDate} disabled className="input-field" id="input-date" type="date" min="2002-01-01" max={moment().format('YYYY-MM-DD')} />
+        </div>
+        <div className="row-form">
+          <label className="input-label" htmlFor="input-weight">Berat Badan</label>
+          <input value={weight} onChange={(event) => onWeightChangeHandler(event.target.value)} required className="input-field" id="input-weight" type="number" min="1" placeholder="kg" />
+        </div>
+        <div className="row-form">
+          <label className="input-label" htmlFor="input-height">Tinggi Badan</label>
+          <input value={height} onChange={(event) => onHeightChangeHandler(event.target.value)} required className="input-field" id="input-height" type="number" min={1} placeholder="cm" />
+        </div>
+        <div className="row-form">
+          <label className="input-label" htmlFor="input-headlength">Lingkar Kepala</label>
+          <input value={headlength} onChange={(event) => onHeadLengthChangeHandler(event.target.value)} required className="input-field" id="input-headlength" type="number" min={1} placeholder="cm" />
+        </div>
+        <button
+          type="submit"
+          className="button-save-child btn btn-primary"
+          onClick={(event) => updateChildHandler(event)}
+        >
+          Update
+        </button>
 
-        </form>
-      </div>
-      <AppBar listActive="growth-page" />
-    </>
+      </form>
+    </div>
   );
 }
 

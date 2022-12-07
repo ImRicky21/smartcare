@@ -105,49 +105,47 @@ function DetailChildPage() {
   }, [weightPerAge, heightPerAge, headlengthPerAge]);
 
   return (
-    <>
-      <div className="main-content">
-        <BackButton linkTo="/" />
-        <ChildProfileCard id={id} displayStatus="body-data" />
-        <div className="update-child-profile-section-wrapper card">
-          <Link className="update-child-profile-section" to={`/child/growth/update/${id}`}>
-            <FaArrowCircleUp className="update-child-profile-section__icon" />
-            <p className="update-child-profile-section__tag">Update Profile Anak</p>
-          </Link>
+    <div className="main-content">
+      <AppBar listActive="growth-page" />
+      <BackButton linkTo="/" />
+      <ChildProfileCard id={id} displayStatus="body-data" />
+      <div className="update-child-profile-section-wrapper card">
+        <Link className="update-child-profile-section" to={`/child/growth/update/${id}`}>
+          <FaArrowCircleUp className="update-child-profile-section__icon" />
+          <p className="update-child-profile-section__tag">Update Profile Anak</p>
+        </Link>
+      </div>
+      <div className="growth-nav-bar">
+        <button onClick={onClickWeigthNav} type="button" className={`growth-nav-bar__weight ${weightStatus}`}>Berat Badan</button>
+        <button onClick={onClickHeigthNav} type="button" className={`growth-nav-bar__height ${heightStatus}`}>Tinggi Badan</button>
+        <button onClick={onClickHeadlengthNav} type="button" className={`growth-nav-bar__headlength ${headlengthStatus}`}>Lingkar Kepala</button>
+      </div>
+      <div className="growth-result card">
+        <p className="growth-result__indicator">Indikator</p>
+        <h3 className="growth-result__heading">
+          <b>{indicator[navStatus]}</b>
+          {' '}
+          per
+          {' '}
+          <b>Umur</b>
+        </h3>
+        <div className={`growth-result__status ${colorStats[navStatus]}`}>
+          Status Gizi:
+          {' '}
+          {status[navStatus]}
         </div>
-        <div className="growth-nav-bar">
-          <button onClick={onClickWeigthNav} type="button" className={`growth-nav-bar__weight ${weightStatus}`}>Berat Badan</button>
-          <button onClick={onClickHeigthNav} type="button" className={`growth-nav-bar__height ${heightStatus}`}>Tinggi Badan</button>
-          <button onClick={onClickHeadlengthNav} type="button" className={`growth-nav-bar__headlength ${headlengthStatus}`}>Lingkar Kepala</button>
-        </div>
-        <div className="growth-result card">
-          <p className="growth-result__indicator">Indikator</p>
-          <h3 className="growth-result__heading">
-            <b>{indicator[navStatus]}</b>
-            {' '}
-            per
-            {' '}
-            <b>Umur</b>
-          </h3>
-          <div className={`growth-result__status ${colorStats[navStatus]}`}>
-            Status Gizi:
-            {' '}
-            {status[navStatus]}
-          </div>
-          <div className="growth-result__feedback">
-            <b>Feedback:</b>
-            {' '}
-            <ul>
-              {feedback ? feedback.map((dataFeedback) => {
-                key += 1;
-                return (<li key={key}>{dataFeedback}</li>);
-              }) : ''}
-            </ul>
-          </div>
+        <div className="growth-result__feedback">
+          <b>Feedback:</b>
+          {' '}
+          <ul>
+            {feedback ? feedback.map((dataFeedback) => {
+              key += 1;
+              return (<li key={key}>{dataFeedback}</li>);
+            }) : ''}
+          </ul>
         </div>
       </div>
-      <AppBar listActive="growth-page" />
-    </>
+    </div>
   );
 }
 

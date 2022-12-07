@@ -1,6 +1,11 @@
 @import 'base';
 
 .child-profile-card {
+  &:hover {
+    background-color: $color-tertiary;
+    cursor: pointer;
+  }
+
   &__tag {
     color: $color-primary-dark;
     display: flex;
@@ -41,6 +46,12 @@
       border-radius: 15px;
       font-size: .6rem;
       text-align: center;
+
+      @media screen and (min-width:500px) {
+        & {
+          font-size: 1rem;
+        }
+      }
     }
   }
 
@@ -54,6 +65,18 @@
     * {
       font-size: .8rem;
       color: $color-primary;
+
+      @media screen and (min-width:500px) {
+        & {
+          font-size: 1.2rem;
+        }
+      }
+    }
+  }
+
+  @media screen and (min-width:700px) {
+    & {
+      padding: 2rem !important;
     }
   }
 }

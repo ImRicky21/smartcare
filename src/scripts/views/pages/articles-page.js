@@ -5,12 +5,10 @@ import AppBar from '../components/app-bar';
 
 function ArticlesPage() {
   return (
-    <>
-      <div className="main-content">
-        <h1>Page Article</h1>
-      </div>
+    <div className="main-content">
       <AppBar listActive="articles-page" />
-    </>
+      <h1>Page Article</h1>
+    </div>
   );
 }
 

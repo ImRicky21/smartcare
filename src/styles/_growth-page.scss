@@ -31,6 +31,12 @@
     }
   }
 
+  .child-profile-section {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+
+
   .no-childs-alert-section {
     display: flex;
     align-items: center;
@@ -52,6 +58,27 @@
       color: $color-primary;
       text-align: center;
       margin: 0;
+    }
+  }
+
+  @media screen and (min-width: 700px) {
+    & {
+      margin: 0 auto;
+      width: 80vw;
+    }
+  }
+
+  @media screen and (min-width: 900px) {
+    & {
+      margin: 0 auto;
+      width: 70vw;
+    }
+  }
+
+  @media screen and (min-width: 1200px) {
+    & {
+      margin: 0 auto;
+      width: 60vw;
     }
   }
 }

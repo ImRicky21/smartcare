@@ -2,6 +2,7 @@
 
 .form-add-child {
   display: flex;
+  margin-bottom: 10vh !important;
 
   * {
     color: $color-primary;
@@ -39,4 +40,7 @@
     }
   }
 
+  @media screen and (min-width: 500px) {
+    padding: 1rem 2rem !important;
+  }
 }

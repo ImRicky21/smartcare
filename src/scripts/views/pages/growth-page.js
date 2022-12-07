@@ -16,13 +16,14 @@ function GrowthPage({ childs }) {
     navigates('/child/add');
   }
   return (
-    <>
-      <div className="main-content">
-        <div className="add-child-profile-section card" onClick={onClickAddChildHandler}>
-          <FaPlusCircle className="add-child-profile-section__icon" />
-          <p className="add-child-profile-section__tag">Tambah Profile Anak</p>
-        </div>
-        {childs
+    <div className="main-content">
+      <AppBar listActive="growth-page" />
+      <div className="add-child-profile-section card" onClick={onClickAddChildHandler}>
+        <FaPlusCircle className="add-child-profile-section__icon" />
+        <p className="add-child-profile-section__tag">Tambah Profile Anak</p>
+      </div>
+      <div className="child-profile-section">
+        {childs.length
           ? childs.map((child) => <ChildProfileCard id={child} key={child} displayStatus="growth-status" />)
           : (
             <div className="no-childs-alert-section card">
@@ -33,8 +34,7 @@ function GrowthPage({ childs }) {
             </div>
           )}
       </div>
-      <AppBar listActive="growth-page" />
-    </>
+    </div>
   );
 }
 
