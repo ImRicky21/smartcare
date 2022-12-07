@@ -18,8 +18,16 @@ const headlengthPerAgeColorStats = {
   normal: 'highlight-green',
 };
 
+const developmentColorStats = {
+  memuaskan: 'highlight-green',
+  meragukan: 'highlight-yellow',
+  menyimpang: 'highlight-red',
+  'belum-dimuat': 'highlight-grey',
+};
+
 export {
   weightPerAgeColorStats,
   heightPerAgeColorStats,
   headlengthPerAgeColorStats,
+  developmentColorStats,
 };

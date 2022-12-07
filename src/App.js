@@ -180,7 +180,12 @@ export default function App() {
                     />
                   )}
                 />
-                <Route path={depelopment} element={<DevelopMentPage />} />
+                <Route
+                  path={depelopment}
+                  element={
+                    <DevelopMentPage childs={childs} />
+                  }
+                />
                 <Route path={articles} element={<ArticlesPage />} />
                 <Route path={vaccines} element={<VaccinesPage />} />
                 <Route

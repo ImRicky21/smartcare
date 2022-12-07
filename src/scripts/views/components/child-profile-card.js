@@ -9,6 +9,7 @@ import {
   weightPerAgeColorStats,
   heightPerAgeColorStats,
   headlengthPerAgeColorStats,
+  developmentColorStats,
 } from '../../utils/highlight-status';
 
 function ChildProfileCard({ id, displayStatus }) {
@@ -16,7 +17,7 @@ function ChildProfileCard({ id, displayStatus }) {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
-  // const [development, setDevelopment] = useState('---');
+  const [development, setDevelopment] = useState('---');
   const [weightPerAge, setWeightPerAge] = useState('---');
   const [heightPerAge, setHeightPerAge] = useState('---');
   const [headlengthPerAge, setHeadLengthPerAge] = useState('');
@@ -25,10 +26,47 @@ function ChildProfileCard({ id, displayStatus }) {
   const [headlength, setHeadLength] = useState('');
 
   function onClickCardHandler() {
-    navigates(`/child/growth/${id}`);
+    navigates(`/child/development/${id}`);
   }
 
   const statusElement = {
+    'development-status': (
+      <>
+        <div className="child-profile-card__data">
+          <div className="data-item">
+            berat:
+            {' '}
+            <b>
+              {weight}
+              kg
+            </b>
+          </div>
+          <div className="data-item">
+            tinggi:
+            {' '}
+            <b>
+              {height}
+              cm
+            </b>
+          </div>
+          <div className="data-item">
+            lingkar kepala:
+            {' '}
+            <b>
+              {headlength}
+              cm
+            </b>
+          </div>
+        </div>
+        <div className={`child-profile-card__development-status ${developmentColorStats[development]}`}>
+          <div className="child-development-status">
+            Status Perkembangan:
+            {' '}
+            <b>{development}</b>
+          </div>
+        </div>
+      </>
+    ),
     'growth-status': (
       <>
         <div className="child-profile-card__data">
@@ -111,7 +149,7 @@ function ChildProfileCard({ id, displayStatus }) {
         setWeight(data.weight);
         setHeight(data.height);
         setHeadLength(data.headlength);
-        // setDevelopment(data.healthStatus.development);
+        setDevelopment(data.healthStatus.development);
         setWeightPerAge(data.healthStatus.weightPerAge);
         setHeightPerAge(data.healthStatus.heightPerAge);
         setHeadLengthPerAge(data.healthStatus.headlengthPerAge);
