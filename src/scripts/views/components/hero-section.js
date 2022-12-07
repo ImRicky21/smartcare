@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 export default function HeroSection() {
   return (
     <section className="hero-section">
-      <img src="../public/hero/hero.svg" alt="" className="hero-image" />
+      <img src={`${process.env.PUBLIC_URL}/hero/hero.svg`} alt="" className="hero-image" />
       <div className="hero-content d-flex flex-column p-4">
         <h1 className="hero-content__heading text-center text-primary-dark py-1">
           Lorem, ipsum dolor sit amet consectetur

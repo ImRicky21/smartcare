@@ -3,27 +3,27 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import moment from 'moment';
-import LocalStorage from '../data/local-storage';
+import LocalStorage from './scripts/data/local-storage';
 import {
   getUserData,
   login,
   register,
   setChildData,
-} from '../data/network-data';
-import path from '../utils/path';
-import Footer from './components/footer';
-import NavBar from './components/navbar';
-import TopBar from './components/top-bar';
-import AddChildPage from './pages/add-child-page';
-import ArticlesPage from './pages/articles-page';
-import DevelopMentPage from './pages/development-page';
-import GrowthPage from './pages/growth-page';
-import LandingPage from './pages/landing-page';
-import SignInPage from './pages/sign-in-page';
-import SignUpPage from './pages/sign-up-page';
-import VaccinesPage from './pages/vaccines-page';
-import DetailChildPage from './pages/detail-child.page';
-import UpdateChildPage from './pages/update-child-page';
+} from './scripts/data/network-data';
+import path from './scripts/utils/path';
+import Footer from './scripts/views/components/footer';
+import NavBar from './scripts/views/components/navbar';
+import TopBar from './scripts/views/components/top-bar';
+import AddChildPage from './scripts/views/pages/add-child-page';
+import ArticlesPage from './scripts/views/pages/articles-page';
+import DevelopMentPage from './scripts/views/pages/development-page';
+import GrowthPage from './scripts/views/pages/growth-page';
+import LandingPage from './scripts/views/pages/landing-page';
+import SignInPage from './scripts/views/pages/sign-in-page';
+import SignUpPage from './scripts/views/pages/sign-up-page';
+import VaccinesPage from './scripts/views/pages/vaccines-page';
+import DetailChildPage from './scripts/views/pages/detail-child.page';
+import UpdateChildPage from './scripts/views/pages/update-child-page';
 
 const {
   root,

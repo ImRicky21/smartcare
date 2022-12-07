@@ -1,9 +1,11 @@
 @import 'base';
 
 .child-profile-card {
-  &:hover {
-    background-color: $color-tertiary;
-    cursor: pointer;
+  &.growth-status {
+    &:hover {
+      background-color: $color-tertiary;
+      cursor: pointer;
+    }
   }
 
   &__tag {
