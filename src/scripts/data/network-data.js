@@ -35,6 +35,13 @@ async function getChildData(id) {
   return responseJson;
 }
 
+async function getSurveyData({ id, age }) {
+  console.log(`${API_ENDPOINT.development}${id}/${age}`);
+  const response = await fetch(`${API_ENDPOINT.development}${id}/${age}`);
+  const responseJson = await response.json();
+  return responseJson;
+}
+
 async function getGrowthFeedback({ measurement, status }) {
   const response = await fetch(`${API_ENDPOINT.growth}${measurement}/${status}`);
   const responseJson = await response.json();
@@ -48,6 +55,18 @@ async function setChildData({ id, data }) {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({ ...data }),
+  });
+
+  return response.json();
+}
+
+async function setChildDevelopmentData({ id, age, answer }) {
+  const response = await fetch(`${API_ENDPOINT.development}${id}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ age, answer }),
   });
 
   return response.json();
@@ -73,4 +92,6 @@ export {
   setChildData,
   getGrowthFeedback,
   putChildData,
+  getSurveyData,
+  setChildDevelopmentData,
 };

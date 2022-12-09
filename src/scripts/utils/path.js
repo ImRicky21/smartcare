@@ -2,12 +2,14 @@ const path = {
   root: '/',
   signUp: 'sign-up',
   signIn: '/sign-in',
-  depelopment: '/development',
+  development: '/development',
   articles: '/articles',
   vaccines: '/vaccines',
   addChild: '/child/add',
-  detailChild: '/child/growth/:id',
+  detailGrowthChild: '/child/growth/:id',
+  detailDevelopmentChild: '/child/development/:id',
   updateChild: '/child/growth/update/:id',
+  developmentSurvey: '/child/development/survey/:id',
 };
 
 export default path;

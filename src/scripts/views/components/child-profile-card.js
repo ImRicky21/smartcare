@@ -9,6 +9,7 @@ import {
   weightPerAgeColorStats,
   heightPerAgeColorStats,
   headlengthPerAgeColorStats,
+  developmentColorStats,
 } from '../../utils/highlight-status';
 
 function ChildProfileCard({ id, displayStatus }) {
@@ -16,7 +17,7 @@ function ChildProfileCard({ id, displayStatus }) {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
-  // const [development, setDevelopment] = useState('---');
+  const [development, setDevelopment] = useState('belum-dimuat');
   const [weightPerAge, setWeightPerAge] = useState('---');
   const [heightPerAge, setHeightPerAge] = useState('---');
   const [headlengthPerAge, setHeadLengthPerAge] = useState('');
@@ -24,11 +25,56 @@ function ChildProfileCard({ id, displayStatus }) {
   const [height, setHeight] = useState('');
   const [headlength, setHeadLength] = useState('');
 
-  function onClickCardHandler() {
-    navigates(`/child/growth/${id}`);
+  const navigateTo = {
+    'growth-status': 'growth',
+    'development-status': 'development',
+  };
+
+  function onClickCardHandler(event) {
+    event.preventDefault();
+    if (displayStatus !== 'body-data') {
+      navigates(`/child/${navigateTo[displayStatus]}/${id}`);
+    }
   }
 
   const statusElement = {
+    'development-status': (
+      <>
+        <div className="child-profile-card__data">
+          <div className="data-item">
+            berat:
+            {' '}
+            <b>
+              {weight}
+              kg
+            </b>
+          </div>
+          <div className="data-item">
+            tinggi:
+            {' '}
+            <b>
+              {height}
+              cm
+            </b>
+          </div>
+          <div className="data-item">
+            lingkar kepala:
+            {' '}
+            <b>
+              {headlength}
+              cm
+            </b>
+          </div>
+        </div>
+        <div>
+          <div className={`child-profile-card__development-status ${developmentColorStats[development]}`}>
+            Status Perkembangan:
+            {' '}
+            <b>{development}</b>
+          </div>
+        </div>
+      </>
+    ),
     'growth-status': (
       <>
         <div className="child-profile-card__data">
@@ -111,7 +157,7 @@ function ChildProfileCard({ id, displayStatus }) {
         setWeight(data.weight);
         setHeight(data.height);
         setHeadLength(data.headlength);
-        // setDevelopment(data.healthStatus.development);
+        setDevelopment(data.healthStatus.development.result);
         setWeightPerAge(data.healthStatus.weightPerAge);
         setHeightPerAge(data.healthStatus.heightPerAge);
         setHeadLengthPerAge(data.healthStatus.headlengthPerAge);
@@ -124,7 +170,7 @@ function ChildProfileCard({ id, displayStatus }) {
   return (
     <div
       className={`child-profile-card card ${displayStatus}`}
-      onClick={onClickCardHandler}
+      onClick={(event) => onClickCardHandler(event)}
     >
       <div className="child-profile-card__tag">
         <img alt="baby-icon" className="child-profile-card__tag__icon" src={`${process.env.PUBLIC_URL}/others/baby.png`} />

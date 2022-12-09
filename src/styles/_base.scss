@@ -14,6 +14,14 @@ $color-highlight-yellow: #fd841f;
 $color-highlight-green: #1ffd78;
 $color-highlight-red: #ED4245;
 
+$color-highlight-yellow-light: rgb(255, 167, 95);
+$color-highlight-green-light: #69ffa5;
+$color-highlight-red-light: #f69192;
+
+$color-highlight-yellow-dark: #bf5d0d;
+$color-highlight-green-dark: #0ba549;
+$color-highlight-red-dark: #aa1f21;
+
 $color-neutral-dark: #1e1e1e;
 $color-neutral-gray: #797979;
 $color-neutral-light: #ffffff;
@@ -94,6 +102,10 @@ $color-main-bg: #E4FFEA;
   &-green {
     background-color: $color-highlight-green;
   }
+
+  &-grey {
+    background-color: $color-neutral-gray;
+  }
 }
 
 .btn-secondary {
@@ -105,4 +117,42 @@ $color-main-bg: #E4FFEA;
   &:hover {
     background-color: $color-primary-light;
   }
+}
+
+.btn-red {
+  background-color: $color-highlight-red;
+  color: $color-neutral-light;
+  box-shadow: inset 0 -6px 0 0 $color-highlight-red-dark;
+  border: none;
+
+  &:hover {
+    background-color: $color-highlight-red-light;
+  }
+}
+
+.btn-green {
+  background-color: $color-highlight-green;
+  color: $color-neutral-light;
+  box-shadow: inset 0 -6px 0 0 $color-highlight-green-dark;
+  border: none;
+
+  &:hover {
+    background-color: $color-highlight-green-light;
+  }
+}
+
+h6,
+.h6,
+h5,
+.h5,
+h4,
+.h4,
+h3,
+.h3,
+h2,
+.h2,
+h1,
+.h1 {
+  padding: .1rem 0;
+  margin: 0;
 }

@@ -1,0 +1,26 @@
+@import 'base';
+
+.main-content {
+  .development-survey-submit {
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+  }
+
+  .development-survey-section {
+    &__heading {
+      * {
+        color: $color-primary;
+        font-size: 1rem;
+        padding: .3rem 0;
+      }
+
+      &__heading-item {
+        font-size: 1.5rem;
+        font-weight: bold;
+      }
+    }
+  }
+}

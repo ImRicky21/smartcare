@@ -72,11 +72,11 @@
     }
 
     &__heading {
-      * {
-        font-size: 1.5rem;
-      }
+      padding: .5rem 0;
 
-      padding: .2rem 0;
+      * {
+        font-size: 2rem;
+      }
     }
 
     &__status {

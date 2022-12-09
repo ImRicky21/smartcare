@@ -16,25 +16,29 @@ import NavBar from './scripts/views/components/navbar';
 import TopBar from './scripts/views/components/top-bar';
 import AddChildPage from './scripts/views/pages/add-child-page';
 import ArticlesPage from './scripts/views/pages/articles-page';
-import DevelopMentPage from './scripts/views/pages/development-page';
+import DevelopmentPage from './scripts/views/pages/development-page';
 import GrowthPage from './scripts/views/pages/growth-page';
 import LandingPage from './scripts/views/pages/landing-page';
 import SignInPage from './scripts/views/pages/sign-in-page';
 import SignUpPage from './scripts/views/pages/sign-up-page';
 import VaccinesPage from './scripts/views/pages/vaccines-page';
-import DetailChildPage from './scripts/views/pages/detail-child.page';
+import GrowthDetailChildPage from './scripts/views/pages/growth-detail-child.page';
 import UpdateChildPage from './scripts/views/pages/update-child-page';
+import DevelopmentDetailChildPage from './scripts/views/pages/development-detail-child-page';
+import DevelopmentSurveyPage from './scripts/views/pages/development-survey-page';
 
 const {
   root,
   signUp,
   signIn,
-  depelopment,
+  development,
   articles,
   vaccines,
   addChild,
-  detailChild,
+  detailGrowthChild,
+  detailDevelopmentChild,
   updateChild,
+  developmentSurvey,
 } = path;
 
 export default function App() {
@@ -180,12 +184,23 @@ export default function App() {
                     />
                   )}
                 />
-                <Route path={depelopment} element={<DevelopMentPage />} />
+                <Route
+                  path={development}
+                  element={(
+                    <DevelopmentPage
+                      childs={childs}
+                    />
+                  )}
+                />
                 <Route path={articles} element={<ArticlesPage />} />
                 <Route path={vaccines} element={<VaccinesPage />} />
                 <Route
-                  path={detailChild}
-                  element={<DetailChildPage />}
+                  path={detailGrowthChild}
+                  element={<GrowthDetailChildPage />}
+                />
+                <Route
+                  path={detailDevelopmentChild}
+                  element={<DevelopmentDetailChildPage />}
                 />
                 <Route
                   path={addChild}
@@ -194,6 +209,10 @@ export default function App() {
                 <Route
                   path={updateChild}
                   element={<UpdateChildPage />}
+                />
+                <Route
+                  path={developmentSurvey}
+                  element={<DevelopmentSurveyPage />}
                 />
               </Routes>
             </main>

@@ -1,0 +1,64 @@
+@import 'base';
+
+.development-survey-section__question {
+  * {
+    color: $color-primary;
+  }
+
+  display: flex;
+
+  @media screen and (min-width: 700px) {
+    display: grid;
+    grid-template-columns: 8fr 4fr;
+    grid-template-rows: 1fr;
+
+  }
+
+  .question-section {
+    width: 100%;
+
+    &__label {
+      font-size: .8rem;
+      color: $color-primary-light;
+      background-color: $color-primary;
+      font-weight: bold;
+      border-radius: 15px;
+      width: fit-content;
+      padding: .3rem .5rem;
+    }
+
+    &__answer {
+      font-weight: bold;
+    }
+  }
+
+  .answer-section {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: row;
+
+    * {
+      margin: 0 .5rem;
+      border-radius: 15px;
+      border: none;
+      font-weight: bold;
+      font-size: 1.2rem;
+      color: $color-neutral-light;
+      width: 100%;
+      padding: .3rem 0;
+    }
+
+    @media screen and (min-width: 700px) {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      * {
+        margin: .5rem 0;
+      }
+    }
+  }
+}

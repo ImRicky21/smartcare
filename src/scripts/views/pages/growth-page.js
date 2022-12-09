@@ -11,7 +11,6 @@ import ChildProfileCard from '../components/child-profile-card';
 
 function GrowthPage({ childs }) {
   const navigates = useNavigate();
-  console.log(childs);
   function onClickAddChildHandler() {
     navigates('/child/add');
   }
