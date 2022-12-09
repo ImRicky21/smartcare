@@ -9,6 +9,7 @@ const path = {
   detailGrowthChild: '/child/growth/:id',
   detailDevelopmentChild: '/child/development/:id',
   updateChild: '/child/growth/update/:id',
+  developmentSurvey: '/child/development/survey/:id',
 };
 
 export default path;

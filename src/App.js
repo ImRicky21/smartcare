@@ -25,6 +25,7 @@ import VaccinesPage from './scripts/views/pages/vaccines-page';
 import GrowthDetailChildPage from './scripts/views/pages/growth-detail-child.page';
 import UpdateChildPage from './scripts/views/pages/update-child-page';
 import DevelopmentDetailChildPage from './scripts/views/pages/development-detail-child-page';
+import DevelopmentSurveyPage from './scripts/views/pages/development-survey-page';
 
 const {
   root,
@@ -37,6 +38,7 @@ const {
   detailGrowthChild,
   detailDevelopmentChild,
   updateChild,
+  developmentSurvey,
 } = path;
 
 export default function App() {
@@ -207,6 +209,10 @@ export default function App() {
                 <Route
                   path={updateChild}
                   element={<UpdateChildPage />}
+                />
+                <Route
+                  path={developmentSurvey}
+                  element={<DevelopmentSurveyPage />}
                 />
               </Routes>
             </main>

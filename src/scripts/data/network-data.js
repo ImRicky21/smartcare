@@ -35,6 +35,13 @@ async function getChildData(id) {
   return responseJson;
 }
 
+async function getSurveyData({ id, age }) {
+  console.log(`${API_ENDPOINT.development}${id}/${age}`);
+  const response = await fetch(`${API_ENDPOINT.development}${id}/${age}`);
+  const responseJson = await response.json();
+  return responseJson;
+}
+
 async function getGrowthFeedback({ measurement, status }) {
   const response = await fetch(`${API_ENDPOINT.growth}${measurement}/${status}`);
   const responseJson = await response.json();
@@ -73,4 +80,5 @@ export {
   setChildData,
   getGrowthFeedback,
   putChildData,
+  getSurveyData,
 };
