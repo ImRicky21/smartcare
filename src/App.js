@@ -5,6 +5,7 @@ import { Routes, Route, useNavigate } from 'react-router-dom';
 import moment from 'moment';
 import LocalStorage from './scripts/data/local-storage';
 import {
+  deleteChildData,
   getUserData,
   login,
   register,
@@ -26,6 +27,8 @@ import GrowthDetailChildPage from './scripts/views/pages/growth-detail-child.pag
 import UpdateChildPage from './scripts/views/pages/update-child-page';
 import DevelopmentDetailChildPage from './scripts/views/pages/development-detail-child-page';
 import DevelopmentSurveyPage from './scripts/views/pages/development-survey-page';
+import ChildsProfilePage from './scripts/views/pages/childs-profile-page';
+import EditChildPage from './scripts/views/pages/edit-child-page';
 
 const {
   root,
@@ -39,6 +42,8 @@ const {
   detailDevelopmentChild,
   updateChild,
   developmentSurvey,
+  editChild,
+  growth,
 } = path;
 
 export default function App() {
@@ -165,7 +170,20 @@ export default function App() {
     alert('succes');
     console.log(response);
     setChilds([response.data.id, ...childs]);
-    navigate('/');
+    navigate('/childs');
+  };
+
+  const onDeleteHandler = async ({ childId }) => {
+    const { error } = await deleteChildData({ userId: authedUser.id, childId });
+    if (error) {
+      alert(error.message);
+    }
+    const tempChilds = [...childs];
+    const findedIndex = tempChilds.indexOf(childId);
+    if (findedIndex >= 0) {
+      tempChilds.splice(findedIndex, 1);
+      setChilds([...tempChilds]);
+    }
   };
 
   return (
@@ -177,7 +195,7 @@ export default function App() {
             <main>
               <Routes>
                 <Route
-                  path={root}
+                  path={growth}
                   element={(
                     <GrowthPage
                       childs={childs}
@@ -207,8 +225,16 @@ export default function App() {
                   element={<AddChildPage AddChildHandler={addChildHandler} />}
                 />
                 <Route
+                  path={editChild}
+                  element={<EditChildPage />}
+                />
+                <Route
                   path={updateChild}
                   element={<UpdateChildPage />}
+                />
+                <Route
+                  path={root}
+                  element={<ChildsProfilePage onDelete={onDeleteHandler} childs={childs} />}
                 />
                 <Route
                   path={developmentSurvey}

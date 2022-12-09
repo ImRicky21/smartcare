@@ -8,6 +8,7 @@ const API_ENDPOINT = {
   addChild: `${CONFIG.BASE_URL}api/user/add-child/`,
   growth: `${CONFIG.BASE_URL}api/growth/`,
   development: `${CONFIG.BASE_URL}api/development/`,
+  deleteChild: `${CONFIG.BASE_URL}api/user/remove-child`,
 };
 
 export default API_ENDPOINT;

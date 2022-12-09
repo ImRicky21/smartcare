@@ -3,25 +3,16 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/jsx-filename-extension */
 import React from 'react';
-import { FaPlusCircle, FaExclamationCircle } from 'react-icons/fa';
+import { FaExclamationCircle } from 'react-icons/fa';
 import PropTypes from 'prop-types';
-import { useNavigate } from 'react-router-dom';
 import AppBar from '../components/app-bar';
 import ChildProfileCard from '../components/child-profile-card';
 // import ChildProfileCard from '../components/child-profile-card';
 
 function DevelopmentPage({ childs }) {
-  const navigates = useNavigate();
-  function onClickAddChildHandler() {
-    navigates('/child/add');
-  }
   return (
     <div className="main-content">
       <AppBar listActive="development-page" />
-      <div className="add-child-profile-section card" onClick={onClickAddChildHandler}>
-        <FaPlusCircle className="add-child-profile-section__icon" />
-        <p className="add-child-profile-section__tag">Tambah Profile Anak</p>
-      </div>
       <div className="child-profile-section">
         {
           childs.length

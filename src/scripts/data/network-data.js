@@ -84,6 +84,18 @@ async function putChildData({ id, data }) {
   return response.json();
 }
 
+async function deleteChildData({ userId, childId }) {
+  const response = await fetch(`${API_ENDPOINT.deleteChild}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ id: userId, child: childId }),
+  });
+
+  return response.json();
+}
+
 export {
   register,
   login,
@@ -94,4 +106,5 @@ export {
   putChildData,
   getSurveyData,
   setChildDevelopmentData,
+  deleteChildData,
 };

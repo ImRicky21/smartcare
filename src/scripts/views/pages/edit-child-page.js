@@ -1,12 +1,16 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { useState } from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
 import moment from 'moment';
+import { useNavigate, useParams } from 'react-router-dom';
 import AppBar from '../components/app-bar';
 import BackButton from '../components/back-button';
+import { getChildData, putChildData } from '../../data/network-data';
 
-function AddChildPage({ AddChildHandler }) {
+function EditChildPage() {
+  const navigate = useNavigate();
+  const { id } = useParams();
+  const [childData, setChildData] = useState('');
   const [name, setName] = useState('');
   const [gender, setGender] = useState('perempuan');
   const [weight, setWeight] = useState('');
@@ -25,7 +29,6 @@ function AddChildPage({ AddChildHandler }) {
   const onBirthDateChangeHandler = (value) => {
     setBirthDate(value);
   };
-
   const onWeightChangeHandler = (value) => {
     setWeight(value);
   };
@@ -38,6 +41,64 @@ function AddChildPage({ AddChildHandler }) {
     setHeadlength(value);
   };
 
+  async function updateChildHandler(event) {
+    event.preventDefault();
+
+    if (height <= 1) {
+      alert('input tinggi badan salah');
+      return;
+    }
+    if (weight <= 1) {
+      alert('input berat badan salah');
+      return;
+    }
+    if (headlength <= 1) {
+      alert('input lingkar kepala badan salah');
+      return;
+    }
+
+    const data = {
+      ...childData,
+      name,
+      gender,
+      birthDate,
+      height,
+      weight,
+      headlength,
+    };
+
+    console.log(data);
+
+    const response = await putChildData({ id, data });
+
+    if (response.error) {
+      alert(`error: ${response.message}`);
+      return;
+    }
+
+    alert('succes');
+    console.log(response);
+    navigate('/childs');
+  }
+
+  useEffect(() => {
+    async function fetchChildData() {
+      const response = await getChildData(id);
+      if (!response.error) {
+        const { data } = response;
+        setChildData(data);
+        setName(data.name);
+        setGender(data.gender);
+        setWeight(data.weight);
+        setHeight(data.height);
+        setHeadlength(data.headlength);
+        setBirthDate(data.birthDate);
+      }
+    }
+
+    fetchChildData();
+  }, []);
+
   return (
     <div className="main-content mb-5">
       <AppBar listActive="growth-page" />
@@ -45,19 +106,19 @@ function AddChildPage({ AddChildHandler }) {
       <form className="form-add-child card">
         <div className="row-form">
           <label className="input-label" htmlFor="input-child-name">Nama</label>
-          <input value={name} onChange={(event) => onNameChangeHandler(event.target.value)} required className="input-field" id="input-child-name" type="text" placeholder="Nama" />
+          <input onChange={(event) => onNameChangeHandler(event.target.value)} value={name} className="input-field" id="input-child-name" type="text" placeholder="Nama" />
         </div>
         <div className="row-form">
           <label className="input-label">Gender</label>
           <div className="form-radio">
             <div className="form-check">
-              <input onChange={(event) => onGenderChangeHandler(event.target.value)} required className="form-check-input" type="radio" name="flexRadioDefault" id="input-gender-male" value="laki-laki" />
+              <input onClick={(event) => onGenderChangeHandler(event.target.value)} className="form-check-input" type="radio" name="flexRadioDefault" id="input-gender-male" value="laki-laki" defaultChecked={gender === 'laki-laki' ? 'true' : 'false'} />
               <label className="form-check-label" htmlFor="input-gender-male">
                 Laki-laki
               </label>
             </div>
             <div className="form-check">
-              <input onChange={(event) => onGenderChangeHandler(event.target.value)} required className="form-check-input" type="radio" name="flexRadioDefault" id="input-gender-female" value="perempuan" defaultChecked />
+              <input onClick={(event) => onGenderChangeHandler(event.target.value)} required className="form-check-input" type="radio" name="flexRadioDefault" id="input-gender-female" value="perempuan" defaultChecked={gender === 'perempuan' ? 'true' : 'false'} />
               <label className="form-check-label" htmlFor="input-gender-female">
                 Perempuan
               </label>
@@ -66,7 +127,7 @@ function AddChildPage({ AddChildHandler }) {
         </div>
         <div className="row-form">
           <label className="input-label" htmlFor="input-date">Tanggal lahir</label>
-          <input value={birthDate} onChange={(event) => onBirthDateChangeHandler(event.target.value)} required className="input-field" id="input-date" type="date" min="2002-01-01" max={moment().format('YYYY-MM-DD')} />
+          <input onChange={(event) => onBirthDateChangeHandler(event.target.value)} value={birthDate} className="input-field" id="input-date" type="date" min="2002-01-01" max={moment().format('YYYY-MM-DD')} />
         </div>
         <div className="row-form">
           <label className="input-label" htmlFor="input-weight">Berat Badan</label>
@@ -83,19 +144,9 @@ function AddChildPage({ AddChildHandler }) {
         <button
           type="submit"
           className="button-save-child btn btn-primary"
-          onClick={
-              (event) => AddChildHandler({
-                event,
-                name,
-                gender,
-                birthDate,
-                weight,
-                height,
-                headlength,
-              })
-}
+          onClick={(event) => updateChildHandler(event)}
         >
-          Simpan
+          Update
         </button>
 
       </form>
@@ -103,8 +154,4 @@ function AddChildPage({ AddChildHandler }) {
   );
 }
 
-AddChildPage.propTypes = {
-  AddChildHandler: PropTypes.func.isRequired,
-};
-
-export default AddChildPage;
+export default EditChildPage;
