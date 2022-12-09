@@ -17,7 +17,7 @@ function ChildProfileCard({ id, displayStatus }) {
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
-  const [development, setDevelopment] = useState('---');
+  const [development, setDevelopment] = useState('belum-dimuat');
   const [weightPerAge, setWeightPerAge] = useState('---');
   const [heightPerAge, setHeightPerAge] = useState('---');
   const [headlengthPerAge, setHeadLengthPerAge] = useState('');
@@ -25,8 +25,16 @@ function ChildProfileCard({ id, displayStatus }) {
   const [height, setHeight] = useState('');
   const [headlength, setHeadLength] = useState('');
 
-  function onClickCardHandler() {
-    navigates(`/child/development/${id}`);
+  const navigateTo = {
+    'growth-status': 'growth',
+    'development-status': 'development',
+  };
+
+  function onClickCardHandler(event) {
+    event.preventDefault();
+    if (displayStatus !== 'body-data') {
+      navigates(`/child/${navigateTo[displayStatus]}/${id}`);
+    }
   }
 
   const statusElement = {
@@ -58,8 +66,8 @@ function ChildProfileCard({ id, displayStatus }) {
             </b>
           </div>
         </div>
-        <div className={`child-profile-card__development-status ${developmentColorStats[development]}`}>
-          <div className="child-development-status">
+        <div>
+          <div className={`child-profile-card__development-status ${developmentColorStats[development]}`}>
             Status Perkembangan:
             {' '}
             <b>{development}</b>
@@ -149,7 +157,7 @@ function ChildProfileCard({ id, displayStatus }) {
         setWeight(data.weight);
         setHeight(data.height);
         setHeadLength(data.headlength);
-        setDevelopment(data.healthStatus.development);
+        setDevelopment(data.healthStatus.development.result);
         setWeightPerAge(data.healthStatus.weightPerAge);
         setHeightPerAge(data.healthStatus.heightPerAge);
         setHeadLengthPerAge(data.healthStatus.headlengthPerAge);
@@ -162,7 +170,7 @@ function ChildProfileCard({ id, displayStatus }) {
   return (
     <div
       className={`child-profile-card card ${displayStatus}`}
-      onClick={onClickCardHandler}
+      onClick={(event) => onClickCardHandler(event)}
     >
       <div className="child-profile-card__tag">
         <img alt="baby-icon" className="child-profile-card__tag__icon" src={`${process.env.PUBLIC_URL}/others/baby.png`} />

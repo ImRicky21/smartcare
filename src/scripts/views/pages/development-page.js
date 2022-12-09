@@ -8,8 +8,9 @@ import PropTypes from 'prop-types';
 import { useNavigate } from 'react-router-dom';
 import AppBar from '../components/app-bar';
 import ChildProfileCard from '../components/child-profile-card';
+// import ChildProfileCard from '../components/child-profile-card';
 
-function Development({ childs }) {
+function DevelopmentPage({ childs }) {
   const navigates = useNavigate();
   function onClickAddChildHandler() {
     navigates('/child/add');
@@ -22,23 +23,27 @@ function Development({ childs }) {
         <p className="add-child-profile-section__tag">Tambah Profile Anak</p>
       </div>
       <div className="child-profile-section">
-        {childs.length
-          ? childs.map((child) => <ChildProfileCard id={child} key={child} displayStatus="development-status" />)
-          : (
-            <div className="no-childs-alert-section card">
-              <FaExclamationCircle className="no-childs-alert-section__icon" />
-              <p className="no-childs-alert-section__tag">
-                Anda Belum Menambahkan Profile Anak
-              </p>
-            </div>
-          )}
+        {
+          childs.length
+            ? (
+              childs.map((child) => <ChildProfileCard id={child} key={child} displayStatus="development-status" />)
+            )
+            : (
+              <div className="no-childs-alert-section card">
+                <FaExclamationCircle className="no-childs-alert-section__icon" />
+                <p className="no-childs-alert-section__tag">
+                  Anda Belum Menambahkan Profile Anak
+                </p>
+              </div>
+            )
+        }
       </div>
     </div>
   );
 }
 
-Development.propTypes = {
+DevelopmentPage.propTypes = {
   childs: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
-export default Development;
+export default DevelopmentPage;

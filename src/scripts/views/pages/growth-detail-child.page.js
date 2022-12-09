@@ -8,7 +8,7 @@ import AppBar from '../components/app-bar';
 import BackButton from '../components/back-button';
 import ChildProfileCard from '../components/child-profile-card';
 
-function DetailChildPage() {
+function GrowthDetailChildPage() {
   const { id } = useParams();
   const [feedback, setFeedback] = useState('');
   const [weightPerAge, setWeightPerAge] = useState('');
@@ -64,9 +64,7 @@ function DetailChildPage() {
           measurement: 'weight',
           status: data.healthStatus.weightPerAge,
         });
-        console.log(growthData.data);
         setFeedback(growthData.data);
-        console.log(feedback);
       }
     }
     fetchChildData();
@@ -149,4 +147,4 @@ function DetailChildPage() {
   );
 }
 
-export default DetailChildPage;
+export default GrowthDetailChildPage;
