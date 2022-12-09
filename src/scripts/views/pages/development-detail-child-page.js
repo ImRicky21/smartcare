@@ -10,7 +10,15 @@ import ChildProfileCard from '../components/child-profile-card';
 
 function DevelopmentDetailChildPage() {
   const { id } = useParams();
-  const [development, setDevelopment] = useState('belum-dimuat');
+  const [development, setDevelopment] = useState('--');
+  const [feedbacks, setFeedbacks] = useState([]);
+  const [stimulations, setStimulations] = useState([]);
+  let key = 0;
+
+  function getKey() {
+    key += 1;
+    return key;
+  }
 
   useEffect(() => {
     async function fetchChildData() {
@@ -18,6 +26,8 @@ function DevelopmentDetailChildPage() {
       if (!response.error) {
         const { data } = response;
         setDevelopment(data.healthStatus.development.result);
+        setFeedbacks(data.healthStatus.development.feedback);
+        setStimulations(data.healthStatus.development.stimulation);
       }
     }
     fetchChildData();
@@ -29,7 +39,7 @@ function DevelopmentDetailChildPage() {
       <BackButton linkTo="/" />
       <ChildProfileCard id={id} displayStatus="body-data" />
       <div className="survey-child-profile-section-wrapper card">
-        <Link className="survey-child-profile-section" to={`/child/growth/survey/${id}`}>
+        <Link className="survey-child-profile-section" to={`/child/development/survey/${id}`}>
           <FaComment className="survey-child-profile-section__icon" />
           <p className="survey-child-profile-section__tag">Survey Profile Anak</p>
         </Link>
@@ -46,17 +56,58 @@ function DevelopmentDetailChildPage() {
           {development}
         </div>
       </div>
-      {development === 'belum-dimuat' ? '' : (
+      {development === 'belum-dimuat' || development === '--' ? '' : (
         <>
           <div className="development-feedback card">
             <h3 className="development-feedback__heading">
               <b>Feedback</b>
             </h3>
+            {feedbacks.map((feedback) => <div className="feedback-item" key={getKey()}>{feedback}</div>)}
           </div>
           <div className="development-stimulation card">
             <h3 className="development-stimulation__heading">
               <b>Stimulasi</b>
             </h3>
+            {
+              stimulations.BICARA_DAN_BAHASA
+                ? (
+                  <>
+                    <h4 className="stimulation-heading">Bicara dan Bahasa</h4>
+                    {stimulations.BICARA_DAN_BAHASA.map((value) => <div key={getKey()} className="stimulation-item">{value}</div>)}
+                  </>
+                )
+                : ''
+            }
+            {
+              stimulations.GERAK_HALUS
+                ? (
+                  <>
+                    <h4 className="stimulation-heading">Gerak Halus</h4>
+                    {stimulations.GERAK_HALUS.map((value) => <div key={getKey()} className="stimulation-item">{value}</div>)}
+                  </>
+                )
+                : ''
+            }
+            {
+              stimulations.GERAK_KASAR
+                ? (
+                  <>
+                    <h4 className="stimulation-heading">Gerak Kasar</h4>
+                    {stimulations.GERAK_KASAR.map((value) => <div key={getKey()} className="stimulation-item">{value}</div>)}
+                  </>
+                )
+                : ''
+            }
+            {
+              stimulations.SOSIAL_DAN_KEMANDIRIAN
+                ? (
+                  <>
+                    <h4 className="stimulation-heading">Gerak Kasar</h4>
+                    {stimulations.SOSIAL_DAN_KEMANDIRIAN.map((value) => <div key={getKey()} className="stimulation-item">{value}</div>)}
+                  </>
+                )
+                : ''
+            }
           </div>
         </>
       )}
