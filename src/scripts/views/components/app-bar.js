@@ -6,7 +6,7 @@ import {
   FaChild,
   FaBrain,
   FaNewspaper,
-  FaSyringe,
+  FaBabyCarriage,
 } from 'react-icons/fa';
 
 function AppBar({ listActive }) {
@@ -14,8 +14,13 @@ function AppBar({ listActive }) {
     <nav className="app-bar nav">
       <div className="app-bar__wrapper">
         <ul className="app-bar__list-container list-icon">
-          <li className={`list-item ${listActive === 'growth-page' ? 'active' : ''}`}>
+          <li className={`list-item ${listActive === 'childs-page' ? 'active' : ''}`}>
             <Link to="/">
+              <FaBabyCarriage />
+            </Link>
+          </li>
+          <li className={`list-item ${listActive === 'growth-page' ? 'active' : ''}`}>
+            <Link to="/growth">
               <FaChild />
             </Link>
           </li>
@@ -29,15 +34,15 @@ function AppBar({ listActive }) {
               <FaNewspaper />
             </Link>
           </li>
-          <li className={`list-item ${listActive === 'vaccines-page' ? 'active' : ''}`}>
-            <Link to="/vaccines">
-              <FaSyringe />
-            </Link>
-          </li>
         </ul>
         <ul className="app-bar__list-container list-detail">
-          <li className={`list-item ${listActive === 'growth-page' ? 'active' : ''}`}>
+          <li className={`list-item ${listActive === 'childs-page' ? 'active' : ''}`}>
             <Link to="/">
+              Profile Anak
+            </Link>
+          </li>
+          <li className={`list-item ${listActive === 'growth-page' ? 'active' : ''}`}>
+            <Link to="/growth">
               Pertumbuhan
             </Link>
           </li>
@@ -49,11 +54,6 @@ function AppBar({ listActive }) {
           <li className={`list-item ${listActive === 'articles-page' ? 'active' : ''}`}>
             <Link to="/articles">
               Artikel
-            </Link>
-          </li>
-          <li className={`list-item ${listActive === 'vaccines-page' ? 'active' : ''}`}>
-            <Link to="/vaccines">
-              Imunisasi
             </Link>
           </li>
         </ul>
