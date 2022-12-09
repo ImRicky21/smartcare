@@ -12,7 +12,7 @@ function DevelopmentDetailChildPage() {
   const { id } = useParams();
   const [development, setDevelopment] = useState('--');
   const [feedbacks, setFeedbacks] = useState([]);
-  const [stimulations, setStimulations] = useState([]);
+  const [stimulations, setStimulations] = useState('');
   let key = 0;
 
   function getKey() {
@@ -36,7 +36,7 @@ function DevelopmentDetailChildPage() {
   return (
     <div className="main-content">
       <AppBar listActive="development-page" />
-      <BackButton linkTo="/" />
+      <BackButton linkTo="/development" />
       <ChildProfileCard id={id} displayStatus="body-data" />
       <div className="survey-child-profile-section-wrapper card">
         <Link className="survey-child-profile-section" to={`/child/development/survey/${id}`}>
@@ -64,11 +64,13 @@ function DevelopmentDetailChildPage() {
             </h3>
             {feedbacks.map((feedback) => <div className="feedback-item" key={getKey()}>{feedback}</div>)}
           </div>
-          <div className="development-stimulation card">
-            <h3 className="development-stimulation__heading">
-              <b>Stimulasi</b>
-            </h3>
-            {
+          {stimulations
+            ? (
+              <div className="development-stimulation card">
+                <h3 className="development-stimulation__heading">
+                  <b>Stimulasi</b>
+                </h3>
+                {
               stimulations.BICARA_DAN_BAHASA
                 ? (
                   <>
@@ -78,7 +80,7 @@ function DevelopmentDetailChildPage() {
                 )
                 : ''
             }
-            {
+                {
               stimulations.GERAK_HALUS
                 ? (
                   <>
@@ -88,7 +90,7 @@ function DevelopmentDetailChildPage() {
                 )
                 : ''
             }
-            {
+                {
               stimulations.GERAK_KASAR
                 ? (
                   <>
@@ -98,17 +100,19 @@ function DevelopmentDetailChildPage() {
                 )
                 : ''
             }
-            {
-              stimulations.SOSIAL_DAN_KEMANDIRIAN
+                {
+              stimulations.SOSIALISASI_DAN_KEMANDIRIAN
                 ? (
                   <>
-                    <h4 className="stimulation-heading">Gerak Kasar</h4>
-                    {stimulations.SOSIAL_DAN_KEMANDIRIAN.map((value) => <div key={getKey()} className="stimulation-item">{value}</div>)}
+                    <h4 className="stimulation-heading">Sosialisasi dan Kemandirian</h4>
+                    {stimulations.SOSIALISASI_DAN_KEMANDIRIAN.map((value) => <div key={getKey()} className="stimulation-item">{value}</div>)}
                   </>
                 )
                 : ''
             }
-          </div>
+              </div>
+            )
+            : ''}
         </>
       )}
     </div>

@@ -60,6 +60,18 @@ async function setChildData({ id, data }) {
   return response.json();
 }
 
+async function setChildDevelopmentData({ id, age, answer }) {
+  const response = await fetch(`${API_ENDPOINT.development}${id}`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ age, answer }),
+  });
+
+  return response.json();
+}
+
 async function putChildData({ id, data }) {
   const response = await fetch(`${API_ENDPOINT.child}${id}`, {
     method: 'PUT',
@@ -81,4 +93,5 @@ export {
   getGrowthFeedback,
   putChildData,
   getSurveyData,
+  setChildDevelopmentData,
 };
