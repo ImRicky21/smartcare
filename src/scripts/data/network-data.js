@@ -41,6 +41,12 @@ async function getArticlesData() {
   return responseJson;
 }
 
+async function getArticleData(id) {
+  const response = await fetch(`${API_ENDPOINT.article}${id}`);
+  const responseJson = await response.json();
+  return responseJson;
+}
+
 async function getSurveyData({ id, age }) {
   console.log(`${API_ENDPOINT.development}${id}/${age}`);
   const response = await fetch(`${API_ENDPOINT.development}${id}/${age}`);
@@ -114,4 +120,5 @@ export {
   setChildDevelopmentData,
   deleteChildData,
   getArticlesData,
+  getArticleData,
 };

@@ -4,6 +4,7 @@ const path = {
   signIn: '/sign-in',
   development: '/development',
   articles: '/articles',
+  articleDetail: '/article/:id',
   vaccines: '/vaccines',
   addChild: '/child/add',
   detailGrowthChild: '/child/growth/:id',

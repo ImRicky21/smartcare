@@ -29,6 +29,7 @@ import DevelopmentDetailChildPage from './scripts/views/pages/development-detail
 import DevelopmentSurveyPage from './scripts/views/pages/development-survey-page';
 import ChildsProfilePage from './scripts/views/pages/childs-profile-page';
 import EditChildPage from './scripts/views/pages/edit-child-page';
+import ArticleDetailPage from './scripts/views/pages/article-detail-page';
 
 const {
   root,
@@ -36,6 +37,7 @@ const {
   signIn,
   development,
   articles,
+  articleDetail,
   vaccines,
   addChild,
   detailGrowthChild,
@@ -211,6 +213,7 @@ export default function App() {
                   )}
                 />
                 <Route path={articles} element={<ArticlesPage />} />
+                <Route path={articleDetail} element={<ArticleDetailPage />} />
                 <Route path={vaccines} element={<VaccinesPage />} />
                 <Route
                   path={detailGrowthChild}
