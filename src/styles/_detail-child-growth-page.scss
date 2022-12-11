@@ -52,11 +52,6 @@
         color: $color-primary-light;
       }
 
-      &:hover {
-        cursor: pointer;
-        background-color: $color-tertiary;
-      }
-
       @media screen and (min-width: 500px) {
         & {
           font-size: 1.2rem;

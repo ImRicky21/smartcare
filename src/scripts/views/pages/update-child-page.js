@@ -1,13 +1,15 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 import { useNavigate, useParams } from 'react-router-dom';
 import AppBar from '../components/app-bar';
 import BackButton from '../components/back-button';
 import { getChildData, putChildData } from '../../data/network-data';
 
-function UpdateChildPage() {
+function UpdateChildPage({ authorizeChildId }) {
   const navigate = useNavigate();
   const { id } = useParams();
   const [childData, setChildData] = useState('');
@@ -33,17 +35,35 @@ function UpdateChildPage() {
   async function updateChildHandler(event) {
     event.preventDefault();
 
+    if (name === '') {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Data tidak valid',
+        text: 'Input Nama Kosong',
+      });
+      return;
+    }
     if (height <= 1) {
-      alert('input tinggi badan salah');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Data tidak valid',
+        text: 'Tinggi anak harus lebih dari 1 cm',
+      });
       return;
     }
     if (weight <= 1) {
-      alert('input berat badan salah');
-      return;
+      Swal.fire({
+        icon: 'warning',
+        title: 'Data tidak valid',
+        text: 'Berat badan anak harus lebih dari 1 kg',
+      }); return;
     }
     if (headlength <= 1) {
-      alert('input lingkar kepala badan salah');
-      return;
+      Swal.fire({
+        icon: 'warning',
+        title: 'Data tidak valid',
+        text: 'Lingkar kepala anak harus lebih dari 1 cm',
+      }); return;
     }
 
     const data = {
@@ -56,12 +76,18 @@ function UpdateChildPage() {
     const response = await putChildData({ id, data });
 
     if (response.error) {
-      alert(`error: ${response.message}`);
+      Swal.fire({
+        icon: 'error',
+        title: 'Update data gagal',
+        text: response.message,
+      });
       return;
     }
 
-    alert('succes');
-    console.log(response);
+    Swal.fire({
+      icon: 'success',
+      title: 'Update data berhasil',
+    });
     navigate(`/child/growth/${id}`);
   }
 
@@ -80,6 +106,7 @@ function UpdateChildPage() {
       }
     }
 
+    authorizeChildId(id);
     fetchChildData();
   }, []);
 
@@ -111,7 +138,7 @@ function UpdateChildPage() {
         </div>
         <div className="row-form">
           <label className="input-label" htmlFor="input-date">Tanggal lahir</label>
-          <input value={birthDate} disabled className="input-field" id="input-date" type="date" min="2002-01-01" max={moment().format('YYYY-MM-DD')} />
+          <input value={birthDate} disabled className="input-field" id="input-date" type="date" min={moment().subtract(24, 'months').format('YYYY-MM-DD')} max={moment().format('YYYY-MM-DD')} />
         </div>
         <div className="row-form">
           <label className="input-label" htmlFor="input-weight">Berat Badan</label>
@@ -137,5 +164,9 @@ function UpdateChildPage() {
     </div>
   );
 }
+
+UpdateChildPage.propTypes = {
+  authorizeChildId: PropTypes.func.isRequired,
+};
 
 export default UpdateChildPage;

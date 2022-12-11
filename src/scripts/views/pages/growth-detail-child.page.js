@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { FaArrowCircleUp } from 'react-icons/fa';
 import { useParams, Link } from 'react-router-dom';
 import { getChildData, getGrowthFeedback } from '../../data/network-data';
@@ -8,12 +9,12 @@ import AppBar from '../components/app-bar';
 import BackButton from '../components/back-button';
 import ChildProfileCard from '../components/child-profile-card';
 
-function GrowthDetailChildPage() {
+function GrowthDetailChildPage({ authorizeChildId }) {
   const { id } = useParams();
   const [feedback, setFeedback] = useState('');
-  const [weightPerAge, setWeightPerAge] = useState('');
-  const [heightPerAge, setHeightPerAge] = useState('');
-  const [headlengthPerAge, setHeadLengthPerAge] = useState('');
+  const [weightPerAge, setWeightPerAge] = useState('sedang dimuat');
+  const [heightPerAge, setHeightPerAge] = useState('sedang dimuat');
+  const [headlengthPerAge, setHeadLengthPerAge] = useState('sedang dimuat');
   const [weightStatus, setWeightStatus] = useState('active');
   const [heightStatus, setHeightStatus] = useState('');
   const [headlengthStatus, setHeadlengthStatus] = useState('');
@@ -67,6 +68,7 @@ function GrowthDetailChildPage() {
         setFeedback(growthData.data);
       }
     }
+    authorizeChildId(id);
     fetchChildData();
   }, []);
 
@@ -105,7 +107,7 @@ function GrowthDetailChildPage() {
   return (
     <div className="main-content">
       <AppBar listActive="growth-page" />
-      <BackButton linkTo="/" />
+      <BackButton linkTo="/growth" />
       <ChildProfileCard id={id} displayStatus="body-data" />
       <div className="update-child-profile-section-wrapper card">
         <Link className="update-child-profile-section" to={`/child/growth/update/${id}`}>
@@ -146,5 +148,9 @@ function GrowthDetailChildPage() {
     </div>
   );
 }
+
+GrowthDetailChildPage.propTypes = {
+  authorizeChildId: PropTypes.func.isRequired,
+};
 
 export default GrowthDetailChildPage;

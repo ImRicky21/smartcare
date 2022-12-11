@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 import LocalStorage from './scripts/data/local-storage';
 import {
   deleteChildData,
@@ -22,7 +23,6 @@ import GrowthPage from './scripts/views/pages/growth-page';
 import LandingPage from './scripts/views/pages/landing-page';
 import SignInPage from './scripts/views/pages/sign-in-page';
 import SignUpPage from './scripts/views/pages/sign-up-page';
-import VaccinesPage from './scripts/views/pages/vaccines-page';
 import GrowthDetailChildPage from './scripts/views/pages/growth-detail-child.page';
 import UpdateChildPage from './scripts/views/pages/update-child-page';
 import DevelopmentDetailChildPage from './scripts/views/pages/development-detail-child-page';
@@ -30,6 +30,8 @@ import DevelopmentSurveyPage from './scripts/views/pages/development-survey-page
 import ChildsProfilePage from './scripts/views/pages/childs-profile-page';
 import EditChildPage from './scripts/views/pages/edit-child-page';
 import ArticleDetailPage from './scripts/views/pages/article-detail-page';
+import LoadingPage from './scripts/views/pages/loading-page';
+import NotFoundPage from './scripts/views/pages/not-found-page';
 
 const {
   root,
@@ -38,7 +40,6 @@ const {
   development,
   articles,
   articleDetail,
-  vaccines,
   addChild,
   detailGrowthChild,
   detailDevelopmentChild,
@@ -51,6 +52,7 @@ const {
 export default function App() {
   const [authedUser, setAuthedUser] = useState('');
   const [childs, setChilds] = useState(['']);
+  const [initialize, setInitialize] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -61,7 +63,10 @@ export default function App() {
         if (!response.error) {
           setChilds(response.data.childs);
         }
+        setInitialize(false);
         setAuthedUser(user);
+      } else {
+        setInitialize(false);
       }
     }
 
@@ -84,23 +89,28 @@ export default function App() {
       password,
     };
     const response = await login(data);
-    console.log(response);
     if (response.error) {
-      alert('error');
+      Swal.fire({
+        icon: 'error',
+        title: 'Sign In Error',
+        text: response.message,
+      });
       return;
     }
     const account = {
       key: 'get-account',
       ...response.data,
     };
-    console.log(account);
     await LocalStorage.putAccount(account);
     const userData = await getUserData(account.id);
     if (!userData.error) {
       setChilds(userData.data.childs);
     }
     setAuthedUser(account);
-    alert('succes');
+    Swal.fire({
+      icon: 'success',
+      title: 'Sign In Succes',
+    });
     navigate('/');
   };
 
@@ -115,12 +125,17 @@ export default function App() {
     };
     const response = await register(data);
     if (response.error) {
-      console.log(response);
-      alert('error');
+      Swal.fire({
+        icon: 'error',
+        title: 'Sign Up Error',
+        text: response.message,
+      });
       return;
     }
-    console.log(response);
-    alert('succes');
+    Swal.fire({
+      icon: 'success',
+      title: 'Sign Up Succes',
+    });
     navigate('/sign-in');
   };
 
@@ -145,40 +160,66 @@ export default function App() {
       headlength,
     };
     if (name === '') {
-      alert('nama kosong');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Data tidak valid',
+        text: 'Input Nama Kosong',
+      });
       return;
     }
     if (height <= 1) {
-      alert('input tinggi badan salah');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Data tidak valid',
+        text: 'Tinggi anak harus lebih dari 1 cm',
+      });
       return;
     }
     if (weight <= 1) {
-      alert('input berat badan salah');
-      return;
+      Swal.fire({
+        icon: 'warning',
+        title: 'Data tidak valid',
+        text: 'Berat badan anak harus lebih dari 1 kg',
+      }); return;
     }
     if (headlength <= 1) {
-      alert('input lingkar kepala badan salah');
-      return;
+      Swal.fire({
+        icon: 'warning',
+        title: 'Data tidak valid',
+        text: 'Lingkar kepala anak harus lebih dari 1 cm',
+      }); return;
     }
-    alert('succes');
+    Swal.fire({
+      icon: 'success',
+      title: 'Simpan data berhasil',
+    });
 
     const response = await setChildData({ id: authedUser.id, data });
 
     if (response.error) {
-      alert(`error: ${response.message}`);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error dalam menyimpan data',
+        text: response.message,
+      });
       return;
     }
-
-    alert('succes');
-    console.log(response);
+    Swal.fire({
+      icon: 'success',
+      title: 'Simpan data anak berhasil',
+    });
     setChilds([response.data.id, ...childs]);
-    navigate('/childs');
+    navigate('/');
   };
 
   const onDeleteHandler = async ({ childId }) => {
-    const { error } = await deleteChildData({ userId: authedUser.id, childId });
+    const { error, message } = await deleteChildData({ userId: authedUser.id, childId });
     if (error) {
-      alert(error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error dalam menghapus data',
+        text: message,
+      });
     }
     const tempChilds = [...childs];
     const findedIndex = tempChilds.indexOf(childId);
@@ -186,7 +227,22 @@ export default function App() {
       tempChilds.splice(findedIndex, 1);
       setChilds([...tempChilds]);
     }
+    Swal.fire({
+      icon: 'success',
+      title: 'Berhasil menghapus data',
+    });
   };
+
+  const authorizeChildIdHandler = (childId) => {
+    const foundedId = childs.indexOf(childId);
+    if (foundedId < 0) {
+      navigate('/page-not-found');
+    }
+  };
+
+  if (initialize) {
+    return <LoadingPage />;
+  }
 
   return (
     <>
@@ -196,6 +252,7 @@ export default function App() {
             <TopBar username={authedUser.username} signOutHandler={signOutHandler} />
             <main>
               <Routes>
+                <Route path="/*" element={<NotFoundPage />} />
                 <Route
                   path={growth}
                   element={(
@@ -214,26 +271,31 @@ export default function App() {
                 />
                 <Route path={articles} element={<ArticlesPage />} />
                 <Route path={articleDetail} element={<ArticleDetailPage />} />
-                <Route path={vaccines} element={<VaccinesPage />} />
                 <Route
                   path={detailGrowthChild}
-                  element={<GrowthDetailChildPage />}
+                  element={<GrowthDetailChildPage authorizeChildId={authorizeChildIdHandler} />}
                 />
                 <Route
                   path={detailDevelopmentChild}
-                  element={<DevelopmentDetailChildPage />}
+                  element={
+                    <DevelopmentDetailChildPage authorizeChildId={authorizeChildIdHandler} />
+                  }
                 />
                 <Route
                   path={addChild}
-                  element={<AddChildPage AddChildHandler={addChildHandler} />}
+                  element={(
+                    <AddChildPage
+                      AddChildHandler={addChildHandler}
+                    />
+                )}
                 />
                 <Route
                   path={editChild}
-                  element={<EditChildPage />}
+                  element={<EditChildPage authorizeChildId={authorizeChildIdHandler} />}
                 />
                 <Route
                   path={updateChild}
-                  element={<UpdateChildPage />}
+                  element={<UpdateChildPage authorizeChildId={authorizeChildIdHandler} />}
                 />
                 <Route
                   path={root}
@@ -241,7 +303,7 @@ export default function App() {
                 />
                 <Route
                   path={developmentSurvey}
-                  element={<DevelopmentSurveyPage />}
+                  element={<DevelopmentSurveyPage authorizeChildId={authorizeChildIdHandler} />}
                 />
               </Routes>
             </main>

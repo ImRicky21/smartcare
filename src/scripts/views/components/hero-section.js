@@ -8,10 +8,8 @@ export default function HeroSection() {
       <img src={`${process.env.PUBLIC_URL}/hero/hero.svg`} alt="" className="hero-image" />
       <div className="hero-content d-flex flex-column p-4">
         <h1 className="hero-content__heading text-center text-primary-dark py-1">
-          Lorem, ipsum dolor sit amet consectetur
-          adipisicing
-          elit.
-          Repudiandae, autem.
+          Ingin memantau pertumbuhan dan perkembangan,
+          serta mencari berbagai informasi baru seputar kesehatan si kecil serta ilmu parenting?
         </h1>
         <button type="button" id="button-sign-in" className="btn btn-primary">
           <Link to="/sign-up">

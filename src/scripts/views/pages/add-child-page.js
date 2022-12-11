@@ -41,7 +41,7 @@ function AddChildPage({ AddChildHandler }) {
   return (
     <div className="main-content mb-5">
       <AppBar listActive="growth-page" />
-      <BackButton linkTo="/childs" />
+      <BackButton linkTo="/" />
       <form className="form-add-child card">
         <div className="row-form">
           <label className="input-label" htmlFor="input-child-name">Nama</label>
@@ -66,7 +66,7 @@ function AddChildPage({ AddChildHandler }) {
         </div>
         <div className="row-form">
           <label className="input-label" htmlFor="input-date">Tanggal lahir</label>
-          <input value={birthDate} onChange={(event) => onBirthDateChangeHandler(event.target.value)} required className="input-field" id="input-date" type="date" min="2002-01-01" max={moment().format('YYYY-MM-DD')} />
+          <input value={birthDate} onChange={(event) => onBirthDateChangeHandler(event.target.value)} required className="input-field" id="input-date" type="date" min={moment().subtract(24, 'months').format('YYYY-MM-DD')} max={moment().format('YYYY-MM-DD')} />
         </div>
         <div className="row-form">
           <label className="input-label" htmlFor="input-weight">Berat Badan</label>

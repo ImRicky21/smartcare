@@ -1,8 +1,33 @@
+@import 'base';
+
 .form-authentication {
-  width: 75vw;
+  width: 80vw;
   margin: 0 auto;
   margin-top: 10vh;
   padding: 1rem 2rem;
+
+  * {
+    color: $color-primary;
+  }
+
+  .form-heading {
+    color: $color-primary;
+    font-weight: bold;
+    font-size: 2rem;
+  }
+
+  .label-field-auth {
+    width: 60vw;
+
+  }
+
+  .input-field-auth {
+    width: 60vw;
+    border-radius: 15px;
+    margin: 1rem 0;
+    padding: 1rem .5rem;
+    background-color: $color-primary-light;
+  }
 
   display: flex;
   align-items: center;

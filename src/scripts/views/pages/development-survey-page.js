@@ -1,13 +1,15 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/jsx-filename-extension */
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { getChildData, getSurveyData, setChildDevelopmentData } from '../../data/network-data';
 import AppBar from '../components/app-bar';
 import BackButton from '../components/back-button';
 import SurveyCard from '../components/survey-card';
 
-function DevelopmentSurveyPage() {
+function DevelopmentSurveyPage({ authorizeChildId }) {
   const navigate = useNavigate();
   const { id } = useParams();
   const [answers, setAnswers] = useState([-1, -1, -1, -1]);
@@ -37,12 +39,19 @@ function DevelopmentSurveyPage() {
 
   async function onSubmit() {
     if (answers.indexOf(-1) !== -1) {
-      alert('Pertanyaan masih belum terjawab');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Isi Semua Survey',
+      });
       return;
     }
-    const { error } = await setChildDevelopmentData({ id, age, answer: answers });
+    const { error, message } = await setChildDevelopmentData({ id, age, answer: answers });
     if (error) {
-      alert(error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error dalam menyimpan data perkembangan anak',
+        text: message,
+      });
     }
     navigate(`/child/development/${id}`);
   }
@@ -60,6 +69,7 @@ function DevelopmentSurveyPage() {
         }
       }
     }
+    authorizeChildId(id);
     fetchChildData();
   }, []);
   return (
@@ -136,5 +146,9 @@ function DevelopmentSurveyPage() {
     </div>
   );
 }
+
+DevelopmentSurveyPage.propTypes = {
+  authorizeChildId: PropTypes.func.isRequired,
+};
 
 export default DevelopmentSurveyPage;

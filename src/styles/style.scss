@@ -1,6 +1,6 @@
 @import '~bootstrap/scss/bootstrap';
-@import 'base';
 @import 'navbar';
+@import 'base';
 @import 'articles-page';
 @import 'article-page';
 @import 'childs-profile-page';
@@ -19,6 +19,9 @@
 @import 'development-survey-page';
 @import 'feature-section';
 @import 'authentication-form';
+@import 'loading-page';
+@import 'loading-item';
+@import 'not-found-page';
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
 $font: 'Poppins',
 sans-serif;

@@ -27,6 +27,12 @@ $color-neutral-gray: #797979;
 $color-neutral-light: #ffffff;
 $color-main-bg: #E4FFEA;
 
+.swal2-container {
+  * {
+    overflow: visible;
+  }
+}
+
 .bg-primary {
   background-color: $color-primary !important;
 }

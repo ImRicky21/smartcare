@@ -10,7 +10,6 @@ function WeightStatusCard({ status }) {
     async function fecthGrowthFeedback() {
       if (status) {
         const { data } = await getGrowthFeedback({ measurement: 'weight', status });
-        console.log(data);
         setFeedback(data);
       }
     }
