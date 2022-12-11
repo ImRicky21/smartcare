@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import Swal from 'sweetalert2';
 import { useNavigate, useParams } from 'react-router-dom';
@@ -8,7 +9,7 @@ import AppBar from '../components/app-bar';
 import BackButton from '../components/back-button';
 import { getChildData, putChildData } from '../../data/network-data';
 
-function UpdateChildPage() {
+function UpdateChildPage({ authorizeChildId }) {
   const navigate = useNavigate();
   const { id } = useParams();
   const [childData, setChildData] = useState('');
@@ -105,6 +106,7 @@ function UpdateChildPage() {
       }
     }
 
+    authorizeChildId(id);
     fetchChildData();
   }, []);
 
@@ -162,5 +164,9 @@ function UpdateChildPage() {
     </div>
   );
 }
+
+UpdateChildPage.propTypes = {
+  authorizeChildId: PropTypes.func.isRequired,
+};
 
 export default UpdateChildPage;

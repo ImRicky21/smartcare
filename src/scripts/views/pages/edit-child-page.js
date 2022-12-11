@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import moment from 'moment';
 import { useNavigate, useParams } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -8,7 +9,7 @@ import AppBar from '../components/app-bar';
 import BackButton from '../components/back-button';
 import { getChildData, putChildData } from '../../data/network-data';
 
-function EditChildPage() {
+function EditChildPage({ authorizeChildId }) {
   const navigate = useNavigate();
   const { id } = useParams();
   const [childData, setChildData] = useState('');
@@ -119,6 +120,7 @@ function EditChildPage() {
       }
     }
 
+    authorizeChildId(id);
     fetchChildData();
   }, []);
 
@@ -176,5 +178,9 @@ function EditChildPage() {
     </div>
   );
 }
+
+EditChildPage.propTypes = {
+  authorizeChildId: PropTypes.func.isRequired,
+};
 
 export default EditChildPage;

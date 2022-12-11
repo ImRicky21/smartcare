@@ -23,7 +23,6 @@ import GrowthPage from './scripts/views/pages/growth-page';
 import LandingPage from './scripts/views/pages/landing-page';
 import SignInPage from './scripts/views/pages/sign-in-page';
 import SignUpPage from './scripts/views/pages/sign-up-page';
-import VaccinesPage from './scripts/views/pages/vaccines-page';
 import GrowthDetailChildPage from './scripts/views/pages/growth-detail-child.page';
 import UpdateChildPage from './scripts/views/pages/update-child-page';
 import DevelopmentDetailChildPage from './scripts/views/pages/development-detail-child-page';
@@ -41,7 +40,6 @@ const {
   development,
   articles,
   articleDetail,
-  vaccines,
   addChild,
   detailGrowthChild,
   detailDevelopmentChild,
@@ -235,6 +233,13 @@ export default function App() {
     });
   };
 
+  const authorizeChildIdHandler = (childId) => {
+    const foundedId = childs.indexOf(childId);
+    if (foundedId < 0) {
+      navigate('/page-not-found');
+    }
+  };
+
   if (initialize) {
     return <LoadingPage />;
   }
@@ -266,26 +271,31 @@ export default function App() {
                 />
                 <Route path={articles} element={<ArticlesPage />} />
                 <Route path={articleDetail} element={<ArticleDetailPage />} />
-                <Route path={vaccines} element={<VaccinesPage />} />
                 <Route
                   path={detailGrowthChild}
-                  element={<GrowthDetailChildPage />}
+                  element={<GrowthDetailChildPage authorizeChildId={authorizeChildIdHandler} />}
                 />
                 <Route
                   path={detailDevelopmentChild}
-                  element={<DevelopmentDetailChildPage />}
+                  element={
+                    <DevelopmentDetailChildPage authorizeChildId={authorizeChildIdHandler} />
+                  }
                 />
                 <Route
                   path={addChild}
-                  element={<AddChildPage AddChildHandler={addChildHandler} />}
+                  element={(
+                    <AddChildPage
+                      AddChildHandler={addChildHandler}
+                    />
+                )}
                 />
                 <Route
                   path={editChild}
-                  element={<EditChildPage />}
+                  element={<EditChildPage authorizeChildId={authorizeChildIdHandler} />}
                 />
                 <Route
                   path={updateChild}
-                  element={<UpdateChildPage />}
+                  element={<UpdateChildPage authorizeChildId={authorizeChildIdHandler} />}
                 />
                 <Route
                   path={root}
@@ -293,7 +303,7 @@ export default function App() {
                 />
                 <Route
                   path={developmentSurvey}
-                  element={<DevelopmentSurveyPage />}
+                  element={<DevelopmentSurveyPage authorizeChildId={authorizeChildIdHandler} />}
                 />
               </Routes>
             </main>

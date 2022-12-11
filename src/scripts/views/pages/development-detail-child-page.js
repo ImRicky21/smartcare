@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { FaComment } from 'react-icons/fa';
 import { useParams, Link } from 'react-router-dom';
 import { getChildData } from '../../data/network-data';
@@ -8,7 +9,7 @@ import AppBar from '../components/app-bar';
 import BackButton from '../components/back-button';
 import ChildProfileCard from '../components/child-profile-card';
 
-function DevelopmentDetailChildPage() {
+function DevelopmentDetailChildPage({ authorizeChildId }) {
   const { id } = useParams();
   const [development, setDevelopment] = useState('sedang-dimuat');
   const [feedbacks, setFeedbacks] = useState([]);
@@ -30,6 +31,7 @@ function DevelopmentDetailChildPage() {
         setStimulations(data.healthStatus.development.stimulation);
       }
     }
+    authorizeChildId(id);
     fetchChildData();
   }, []);
 
@@ -118,5 +120,9 @@ function DevelopmentDetailChildPage() {
     </div>
   );
 }
+
+DevelopmentDetailChildPage.propTypes = {
+  authorizeChildId: PropTypes.func.isRequired,
+};
 
 export default DevelopmentDetailChildPage;

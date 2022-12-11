@@ -1,5 +1,6 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
 import { FaArrowCircleUp } from 'react-icons/fa';
 import { useParams, Link } from 'react-router-dom';
 import { getChildData, getGrowthFeedback } from '../../data/network-data';
@@ -8,7 +9,7 @@ import AppBar from '../components/app-bar';
 import BackButton from '../components/back-button';
 import ChildProfileCard from '../components/child-profile-card';
 
-function GrowthDetailChildPage() {
+function GrowthDetailChildPage({ authorizeChildId }) {
   const { id } = useParams();
   const [feedback, setFeedback] = useState('');
   const [weightPerAge, setWeightPerAge] = useState('sedang dimuat');
@@ -67,6 +68,7 @@ function GrowthDetailChildPage() {
         setFeedback(growthData.data);
       }
     }
+    authorizeChildId(id);
     fetchChildData();
   }, []);
 
@@ -146,5 +148,9 @@ function GrowthDetailChildPage() {
     </div>
   );
 }
+
+GrowthDetailChildPage.propTypes = {
+  authorizeChildId: PropTypes.func.isRequired,
+};
 
 export default GrowthDetailChildPage;
