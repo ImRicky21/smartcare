@@ -32,6 +32,7 @@ import ChildsProfilePage from './scripts/views/pages/childs-profile-page';
 import EditChildPage from './scripts/views/pages/edit-child-page';
 import ArticleDetailPage from './scripts/views/pages/article-detail-page';
 import LoadingPage from './scripts/views/pages/loading-page';
+import NotFoundPage from './scripts/views/pages/not-found-page';
 
 const {
   root,
@@ -246,6 +247,7 @@ export default function App() {
             <TopBar username={authedUser.username} signOutHandler={signOutHandler} />
             <main>
               <Routes>
+                <Route path="/*" element={<NotFoundPage />} />
                 <Route
                   path={growth}
                   element={(
