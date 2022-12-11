@@ -78,7 +78,7 @@ function EditChildPage() {
 
     alert('succes');
     console.log(response);
-    navigate('/childs');
+    navigate('/');
   }
 
   useEffect(() => {
@@ -102,7 +102,7 @@ function EditChildPage() {
   return (
     <div className="main-content mb-5">
       <AppBar listActive="growth-page" />
-      <BackButton linkTo="/childs" />
+      <BackButton linkTo="/" />
       <form className="form-add-child card">
         <div className="row-form">
           <label className="input-label" htmlFor="input-child-name">Nama</label>
@@ -112,13 +112,13 @@ function EditChildPage() {
           <label className="input-label">Gender</label>
           <div className="form-radio">
             <div className="form-check">
-              <input onClick={(event) => onGenderChangeHandler(event.target.value)} className="form-check-input" type="radio" name="flexRadioDefault" id="input-gender-male" value="laki-laki" defaultChecked={gender === 'laki-laki' ? 'true' : 'false'} />
+              <input onClick={(event) => onGenderChangeHandler(event.target.value)} className="form-check-input" type="radio" name="flexRadioDefault" id="input-gender-male" value="laki-laki" defaultChecked={gender === 'laki-laki'} />
               <label className="form-check-label" htmlFor="input-gender-male">
                 Laki-laki
               </label>
             </div>
             <div className="form-check">
-              <input onClick={(event) => onGenderChangeHandler(event.target.value)} required className="form-check-input" type="radio" name="flexRadioDefault" id="input-gender-female" value="perempuan" defaultChecked={gender === 'perempuan' ? 'true' : 'false'} />
+              <input onClick={(event) => onGenderChangeHandler(event.target.value)} required className="form-check-input" type="radio" name="flexRadioDefault" id="input-gender-female" value="perempuan" defaultChecked={gender === 'perempuan'} />
               <label className="form-check-label" htmlFor="input-gender-female">
                 Perempuan
               </label>

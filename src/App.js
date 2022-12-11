@@ -172,7 +172,7 @@ export default function App() {
     alert('succes');
     console.log(response);
     setChilds([response.data.id, ...childs]);
-    navigate('/childs');
+    navigate('/');
   };
 
   const onDeleteHandler = async ({ childId }) => {

@@ -41,7 +41,7 @@ function AddChildPage({ AddChildHandler }) {
   return (
     <div className="main-content mb-5">
       <AppBar listActive="growth-page" />
-      <BackButton linkTo="/childs" />
+      <BackButton linkTo="/" />
       <form className="form-add-child card">
         <div className="row-form">
           <label className="input-label" htmlFor="input-child-name">Nama</label>
