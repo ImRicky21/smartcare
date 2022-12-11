@@ -30,6 +30,7 @@ import DevelopmentSurveyPage from './scripts/views/pages/development-survey-page
 import ChildsProfilePage from './scripts/views/pages/childs-profile-page';
 import EditChildPage from './scripts/views/pages/edit-child-page';
 import ArticleDetailPage from './scripts/views/pages/article-detail-page';
+import LoadingPage from './scripts/views/pages/loading-page';
 
 const {
   root,
@@ -51,6 +52,7 @@ const {
 export default function App() {
   const [authedUser, setAuthedUser] = useState('');
   const [childs, setChilds] = useState(['']);
+  const [initialize, setInitialize] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -61,7 +63,10 @@ export default function App() {
         if (!response.error) {
           setChilds(response.data.childs);
         }
+        setInitialize(false);
         setAuthedUser(user);
+      } else {
+        setInitialize(false);
       }
     }
 
@@ -187,6 +192,10 @@ export default function App() {
       setChilds([...tempChilds]);
     }
   };
+
+  if (initialize) {
+    return <LoadingPage />;
+  }
 
   return (
     <>
