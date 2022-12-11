@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import moment from 'moment';
 import { useNavigate, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import AppBar from '../components/app-bar';
 import BackButton from '../components/back-button';
 import { getChildData, putChildData } from '../../data/network-data';
@@ -44,17 +45,35 @@ function EditChildPage() {
   async function updateChildHandler(event) {
     event.preventDefault();
 
+    if (name === '') {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Data tidak valid',
+        text: 'Input Nama Kosong',
+      });
+      return;
+    }
     if (height <= 1) {
-      alert('input tinggi badan salah');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Data tidak valid',
+        text: 'Tinggi anak harus lebih dari 1 cm',
+      });
       return;
     }
     if (weight <= 1) {
-      alert('input berat badan salah');
-      return;
+      Swal.fire({
+        icon: 'warning',
+        title: 'Data tidak valid',
+        text: 'Berat badan anak harus lebih dari 1 kg',
+      }); return;
     }
     if (headlength <= 1) {
-      alert('input lingkar kepala badan salah');
-      return;
+      Swal.fire({
+        icon: 'warning',
+        title: 'Data tidak valid',
+        text: 'Lingkar kepala anak harus lebih dari 1 cm',
+      }); return;
     }
 
     const data = {
@@ -70,11 +89,18 @@ function EditChildPage() {
     const response = await putChildData({ id, data });
 
     if (response.error) {
-      alert(`error: ${response.message}`);
+      Swal.fire({
+        icon: 'error',
+        title: 'Edit data gagal',
+        text: response.message,
+      });
       return;
     }
 
-    alert('succes');
+    Swal.fire({
+      icon: 'success',
+      title: 'Edit data berhasil',
+    });
     navigate('/');
   }
 

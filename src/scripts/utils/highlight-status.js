@@ -26,6 +26,7 @@ const developmentColorStats = {
   meragukan: 'highlight-yellow',
   menyimpang: 'highlight-red',
   'sedang dimuat': 'highlight-grey',
+  'belum-dimuat': 'highlight-grey',
 };
 
 export {

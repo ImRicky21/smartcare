@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-filename-extension */
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 import { getArticleData } from '../../data/network-data';
 import AppBar from '../components/app-bar';
 import BackButton from '../components/back-button';
@@ -17,7 +18,11 @@ function ArticleDetailPage() {
     async function fetchArticle() {
       const response = await getArticleData(id);
       if (response.error) {
-        alert(response.message);
+        Swal.fire({
+          icon: 'error',
+          title: 'Error dalam mengambil data article',
+          message: response.message,
+        });
         return;
       }
       const { data } = response;

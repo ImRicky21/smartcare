@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/jsx-filename-extension */
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 import { getArticlesData } from '../../data/network-data';
 import AppBar from '../components/app-bar';
 import ArticleCard from '../components/article-card';
@@ -12,7 +13,11 @@ function ArticlesPage() {
     async function fetchArticles() {
       const response = await getArticlesData();
       if (response.error) {
-        alert('error');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error dalam mengambil data',
+          text: response.message,
+        });
         return;
       }
       setArticles(response.data);

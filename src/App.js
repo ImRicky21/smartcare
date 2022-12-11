@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 import LocalStorage from './scripts/data/local-storage';
 import {
   deleteChildData,
@@ -90,7 +91,11 @@ export default function App() {
     };
     const response = await login(data);
     if (response.error) {
-      alert('error');
+      Swal.fire({
+        icon: 'error',
+        title: 'Sign In Error',
+        text: response.message,
+      });
       return;
     }
     const account = {
@@ -103,7 +108,10 @@ export default function App() {
       setChilds(userData.data.childs);
     }
     setAuthedUser(account);
-    alert('succes');
+    Swal.fire({
+      icon: 'success',
+      title: 'Sign In Succes',
+    });
     navigate('/');
   };
 
@@ -118,10 +126,17 @@ export default function App() {
     };
     const response = await register(data);
     if (response.error) {
-      alert('error');
+      Swal.fire({
+        icon: 'error',
+        title: 'Sign Up Error',
+        text: response.message,
+      });
       return;
     }
-    alert('succes');
+    Swal.fire({
+      icon: 'success',
+      title: 'Sign Up Succes',
+    });
     navigate('/sign-in');
   };
 
@@ -146,39 +161,66 @@ export default function App() {
       headlength,
     };
     if (name === '') {
-      alert('nama kosong');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Data tidak valid',
+        text: 'Input Nama Kosong',
+      });
       return;
     }
     if (height <= 1) {
-      alert('input tinggi badan salah');
+      Swal.fire({
+        icon: 'warning',
+        title: 'Data tidak valid',
+        text: 'Tinggi anak harus lebih dari 1 cm',
+      });
       return;
     }
     if (weight <= 1) {
-      alert('input berat badan salah');
-      return;
+      Swal.fire({
+        icon: 'warning',
+        title: 'Data tidak valid',
+        text: 'Berat badan anak harus lebih dari 1 kg',
+      }); return;
     }
     if (headlength <= 1) {
-      alert('input lingkar kepala badan salah');
-      return;
+      Swal.fire({
+        icon: 'warning',
+        title: 'Data tidak valid',
+        text: 'Lingkar kepala anak harus lebih dari 1 cm',
+      }); return;
     }
-    alert('succes');
+    Swal.fire({
+      icon: 'success',
+      title: 'Simpan data berhasil',
+    });
 
     const response = await setChildData({ id: authedUser.id, data });
 
     if (response.error) {
-      alert(`error: ${response.message}`);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error dalam menyimpan data',
+        text: response.message,
+      });
       return;
     }
-
-    alert('succes');
+    Swal.fire({
+      icon: 'success',
+      title: 'Simpan data anak berhasil',
+    });
     setChilds([response.data.id, ...childs]);
     navigate('/');
   };
 
   const onDeleteHandler = async ({ childId }) => {
-    const { error } = await deleteChildData({ userId: authedUser.id, childId });
+    const { error, message } = await deleteChildData({ userId: authedUser.id, childId });
     if (error) {
-      alert(error.message);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error dalam menghapus data',
+        text: message,
+      });
     }
     const tempChilds = [...childs];
     const findedIndex = tempChilds.indexOf(childId);
@@ -186,6 +228,10 @@ export default function App() {
       tempChilds.splice(findedIndex, 1);
       setChilds([...tempChilds]);
     }
+    Swal.fire({
+      icon: 'success',
+      title: 'Berhasil menghapus data',
+    });
   };
 
   if (initialize) {

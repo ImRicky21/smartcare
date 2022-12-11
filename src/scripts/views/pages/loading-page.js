@@ -5,8 +5,7 @@ function LoadingPage() {
   return (
     <main>
       <div className="loading-page">
-        <div className="lds-ring">
-          <div />
+        <div className="lds-facebook">
           <div />
           <div />
           <div />
