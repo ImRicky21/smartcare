@@ -48,7 +48,6 @@ async function getArticleData(id) {
 }
 
 async function getSurveyData({ id, age }) {
-  console.log(`${API_ENDPOINT.development}${id}/${age}`);
   const response = await fetch(`${API_ENDPOINT.development}${id}/${age}`);
   const responseJson = await response.json();
   return responseJson;

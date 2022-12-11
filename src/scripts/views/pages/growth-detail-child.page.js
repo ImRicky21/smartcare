@@ -11,9 +11,9 @@ import ChildProfileCard from '../components/child-profile-card';
 function GrowthDetailChildPage() {
   const { id } = useParams();
   const [feedback, setFeedback] = useState('');
-  const [weightPerAge, setWeightPerAge] = useState('');
-  const [heightPerAge, setHeightPerAge] = useState('');
-  const [headlengthPerAge, setHeadLengthPerAge] = useState('');
+  const [weightPerAge, setWeightPerAge] = useState('sedang dimuat');
+  const [heightPerAge, setHeightPerAge] = useState('sedang dimuat');
+  const [headlengthPerAge, setHeadLengthPerAge] = useState('sedang dimuat');
   const [weightStatus, setWeightStatus] = useState('active');
   const [heightStatus, setHeightStatus] = useState('');
   const [headlengthStatus, setHeadlengthStatus] = useState('');

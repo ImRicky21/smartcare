@@ -89,7 +89,6 @@ export default function App() {
       password,
     };
     const response = await login(data);
-    console.log(response);
     if (response.error) {
       alert('error');
       return;
@@ -98,7 +97,6 @@ export default function App() {
       key: 'get-account',
       ...response.data,
     };
-    console.log(account);
     await LocalStorage.putAccount(account);
     const userData = await getUserData(account.id);
     if (!userData.error) {
@@ -120,11 +118,9 @@ export default function App() {
     };
     const response = await register(data);
     if (response.error) {
-      console.log(response);
       alert('error');
       return;
     }
-    console.log(response);
     alert('succes');
     navigate('/sign-in');
   };
@@ -175,7 +171,6 @@ export default function App() {
     }
 
     alert('succes');
-    console.log(response);
     setChilds([response.data.id, ...childs]);
     navigate('/');
   };

@@ -14,10 +14,11 @@ import {
 
 function ChildProfileCard({ id, displayStatus }) {
   const navigates = useNavigate();
+  const [intialize, setInitialize] = useState(true);
   const [name, setName] = useState('');
   const [age, setAge] = useState('');
   const [gender, setGender] = useState('');
-  const [development, setDevelopment] = useState('belum-dimuat');
+  const [development, setDevelopment] = useState('sedang dimuat');
   const [weightPerAge, setWeightPerAge] = useState('---');
   const [heightPerAge, setHeightPerAge] = useState('---');
   const [headlengthPerAge, setHeadLengthPerAge] = useState('');
@@ -161,6 +162,7 @@ function ChildProfileCard({ id, displayStatus }) {
         setWeightPerAge(data.healthStatus.weightPerAge);
         setHeightPerAge(data.healthStatus.heightPerAge);
         setHeadLengthPerAge(data.healthStatus.headlengthPerAge);
+        setInitialize(false);
       }
     }
 
@@ -172,20 +174,36 @@ function ChildProfileCard({ id, displayStatus }) {
       className={`child-profile-card card ${displayStatus}`}
       onClick={(event) => onClickCardHandler(event)}
     >
-      <div className="child-profile-card__tag">
-        <img alt="baby-icon" className="child-profile-card__tag__icon" src={`${process.env.PUBLIC_URL}/others/baby.png`} />
-        <div className="child-profile-card__tag__detail">
-          <p className="child-name">{name}</p>
-          <div className="child-detail">
-            {age}
-            {' '}
-            Bulan |
-            {' '}
-            {gender}
-          </div>
-        </div>
-      </div>
-      {statusElement[displayStatus]}
+      {
+        intialize
+          ? (
+            <div className="loading-section">
+              <div className="lds-facebook">
+                <div />
+                <div />
+                <div />
+              </div>
+            </div>
+          )
+          : (
+            <>
+              <div className="child-profile-card__tag">
+                <img alt="baby-icon" className="child-profile-card__tag__icon" src={`${process.env.PUBLIC_URL}/others/baby.png`} />
+                <div className="child-profile-card__tag__detail">
+                  <p className="child-name">{name}</p>
+                  <div className="child-detail">
+                    {age}
+                    {' '}
+                    Bulan |
+                    {' '}
+                    {gender}
+                  </div>
+                </div>
+              </div>
+              {statusElement[displayStatus]}
+            </>
+          )
+      }
     </div>
   );
 }

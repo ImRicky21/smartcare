@@ -67,8 +67,6 @@ function EditChildPage() {
       headlength,
     };
 
-    console.log(data);
-
     const response = await putChildData({ id, data });
 
     if (response.error) {
@@ -77,7 +75,6 @@ function EditChildPage() {
     }
 
     alert('succes');
-    console.log(response);
     navigate('/');
   }
 

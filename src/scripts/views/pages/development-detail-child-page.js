@@ -10,7 +10,7 @@ import ChildProfileCard from '../components/child-profile-card';
 
 function DevelopmentDetailChildPage() {
   const { id } = useParams();
-  const [development, setDevelopment] = useState('--');
+  const [development, setDevelopment] = useState('sedang-dimuat');
   const [feedbacks, setFeedbacks] = useState([]);
   const [stimulations, setStimulations] = useState('');
   let key = 0;
@@ -23,7 +23,6 @@ function DevelopmentDetailChildPage() {
   useEffect(() => {
     async function fetchChildData() {
       const response = await getChildData(id);
-      console.log(response);
       if (!response.error) {
         const { data } = response;
         setDevelopment(data.healthStatus.development.result);

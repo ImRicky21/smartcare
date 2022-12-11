@@ -61,7 +61,6 @@ function UpdateChildPage() {
     }
 
     alert('succes');
-    console.log(response);
     navigate(`/child/growth/${id}`);
   }
 
