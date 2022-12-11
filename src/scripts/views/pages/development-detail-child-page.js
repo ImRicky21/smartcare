@@ -23,6 +23,7 @@ function DevelopmentDetailChildPage() {
   useEffect(() => {
     async function fetchChildData() {
       const response = await getChildData(id);
+      console.log(response);
       if (!response.error) {
         const { data } = response;
         setDevelopment(data.healthStatus.development.result);

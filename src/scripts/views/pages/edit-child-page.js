@@ -127,7 +127,7 @@ function EditChildPage() {
         </div>
         <div className="row-form">
           <label className="input-label" htmlFor="input-date">Tanggal lahir</label>
-          <input onChange={(event) => onBirthDateChangeHandler(event.target.value)} value={birthDate} className="input-field" id="input-date" type="date" min="2002-01-01" max={moment().format('YYYY-MM-DD')} />
+          <input onChange={(event) => onBirthDateChangeHandler(event.target.value)} value={birthDate} className="input-field" id="input-date" type="date" min={moment().subtract(24, 'months').format('YYYY-MM-DD')} max={moment().format('YYYY-MM-DD')} />
         </div>
         <div className="row-form">
           <label className="input-label" htmlFor="input-weight">Berat Badan</label>

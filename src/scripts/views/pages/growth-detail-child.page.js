@@ -105,7 +105,7 @@ function GrowthDetailChildPage() {
   return (
     <div className="main-content">
       <AppBar listActive="growth-page" />
-      <BackButton linkTo="/" />
+      <BackButton linkTo="/growth" />
       <ChildProfileCard id={id} displayStatus="body-data" />
       <div className="update-child-profile-section-wrapper card">
         <Link className="update-child-profile-section" to={`/child/growth/update/${id}`}>
